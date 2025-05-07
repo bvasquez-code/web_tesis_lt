@@ -1,0 +1,62 @@
+<div class="container mt-5" *ngIf="tokenValid; else invalidToken">
+    <div class="card mx-auto" style="max-width: 500px;">
+      <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">Registro de Estudiante</h3>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+          <!-- Campo: Código del Estudiante (preasignado y de solo lectura) -->
+          <div class="form-group">
+            <label for="studentCode">Código del Estudiante</label>
+            <input type="text"
+                   id="studentCode"
+                   class="form-control"
+                   required
+                   [(ngModel)]="studentDto.student.StudentID"
+                   name="StudentID"
+                   readonly>
+          </div>
+          <div class="form-group">
+            <label for="documentNum">DNI</label>
+            <input type="text"
+                   id="documentNum"
+                   class="form-control"
+                   required
+                   [(ngModel)]="studentDto.documentNum"
+                   name="documentNum">
+          </div>
+          <!-- Campo: Contraseña -->
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password"
+                   id="password"
+                   class="form-control"
+                   required
+                   [(ngModel)]="studentDto.password"
+                   name="password">
+          </div>
+          <!-- Campo: Confirmar Contraseña -->
+          <div class="form-group">
+            <label for="confirmPassword">Confirmar Contraseña</label>
+            <input type="password"
+                   id="confirmPassword"
+                   class="form-control"
+                   required
+                   [(ngModel)]="confirmPassword"
+                   name="confirmPassword">
+          </div>
+          <div class="d-flex justify-content-between mt-4">
+            <button type="submit" class="btn btn-primary">Registrar</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #invalidToken>
+    <div class="alert alert-danger mt-5">
+      El enlace de registro ha expirado o es inválido.
+    </div>
+  </ng-template>
+  

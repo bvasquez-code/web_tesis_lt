@@ -1,0 +1,297 @@
+
+{
+    "grado": "3",
+    "temarios": [
+      {
+        "id": "1",
+        "curso": "algebra",
+        "listaTemas": [
+          { "id": "1.1", "tema": "Exponentes I" },
+          { "id": "1.2", "tema": "Teoría de Exponentes II" },
+          { "id": "1.3", "tema": "Teoría de Exponentes III" },
+          { "id": "1.4", "tema": "Polinomios" },
+          { "id": "1.5", "tema": "Productos Notables" },
+          { "id": "1.6", "tema": "División de Polinomios" },
+          { "id": "1.7", "tema": "Factorización" },
+          { "id": "1.8", "tema": "Ecuaciones Polinomiales: Lineales y Cuadráticas" },
+          { "id": "1.9", "tema": "Ecuaciones Fraccionarias o Irracionales" },
+          { "id": "1.10", "tema": "Desigualdades e Intervalos" },
+          { "id": "1.11", "tema": "Matrices" },
+          { "id": "1.12", "tema": "Determinantes y Matriz Inversa" },
+          { "id": "1.13", "tema": "Sistema de Ecuaciones Lineales" },
+          { "id": "1.14", "tema": "Valor Absoluto I" }
+        ]
+      },
+      {
+        "id": "2",
+        "curso": "geometria",
+        "listaTemas": [
+          { "id": "2.1", "tema": "Ángulos entre Rectas Paralelas" },
+          { "id": "2.2", "tema": "Triángulos" },
+          { "id": "2.3", "tema": "Congruencia de Triángulos" },
+          { "id": "2.4", "tema": "Aplicación de la Congruencia de Triángulos" },
+          { "id": "2.5", "tema": "Cuadriláteros" },
+          { "id": "2.6", "tema": "Polígonos" },
+          { "id": "2.7", "tema": "Circunferencia" },
+          { "id": "2.8", "tema": "Proporcionalidad de Segmentos y Semejanza de Triángulos" },
+          { "id": "2.9", "tema": "Relaciones Métricas en el Triángulo Rectángulo" },
+          { "id": "2.10", "tema": "Relaciones Métricas en la Circunferencia" },
+          { "id": "2.11", "tema": "Áreas de Regiones Poligonales y Circulares" },
+          { "id": "2.12", "tema": "Geometría del Espacio: Prisma y Pirámide" },
+          { "id": "2.13", "tema": "Geometría del Espacio: Cilindro, Cono y Esfera" }
+        ]
+      },
+      {
+        "id": "3",
+        "curso": "aritmetica",
+        "listaTemas": [
+          { "id": "3.1", "tema": "Sistema de Numeración" },
+          { "id": "3.2", "tema": "El Conjunto de los Números Racionales" },
+          { "id": "3.3", "tema": "Fracciones" },
+          { "id": "3.4", "tema": "Conjunto de Números Racionales: Decimales" },
+          { "id": "3.5", "tema": "Teoría de Conjuntos" },
+          { "id": "3.6", "tema": "Razones y Proporciones" },
+          { "id": "3.7", "tema": "Magnitudes Proporcionales" },
+          { "id": "3.8", "tema": "MCM y MCD" },
+          { "id": "3.9", "tema": "Regla de Tres Simple" },
+          { "id": "3.10", "tema": "Regla de Tres Compuesta" },
+          { "id": "3.11", "tema": "Raz. Matemático" },
+          { "id": "3.12", "tema": "Orden de Información" },
+          { "id": "3.13", "tema": "Certezas" },
+          { "id": "3.14", "tema": "Métodos Operativos" },
+          { "id": "3.15", "tema": "Planteo de Ecuaciones" },
+          { "id": "3.16", "tema": "Edades" },
+          { "id": "3.17", "tema": "Fracciones" },
+          { "id": "3.18", "tema": "Sucesiones" },
+          { "id": "3.19", "tema": "Series" },
+          { "id": "3.20", "tema": "Operaciones Matemáticas" },
+          { "id": "3.21", "tema": "Principios Fundamentales de Conteo" },
+          { "id": "3.22", "tema": "Factorial de un Número" }
+        ]
+      },
+      {
+        "id": "4",
+        "curso": "trigonometria",
+        "listaTemas": [
+          { "id": "4.1", "tema": "Sistema de Medidas Angulares" },
+          { "id": "4.2", "tema": "Sector Circular" },
+          { "id": "4.3", "tema": "Razones Trigonométricas de Ángulos Agudos" },
+          { "id": "4.4", "tema": "Ángulos Verticales" },
+          { "id": "4.5", "tema": "Sistema de Coordenadas Rectangulares" },
+          { "id": "4.6", "tema": "Razones Trigonométricas de Ángulos de Cualquier Magnitud" },
+          { "id": "4.7", "tema": "Razones Trigonométricas de Ángulos Negativos y Cuadrantales" },
+          { "id": "4.8", "tema": "Reducción al Primer Cuadrante" },
+          { "id": "4.9", "tema": "Identidades Trigonométricas de Ángulos Simples" },
+          { "id": "4.10", "tema": "Identidades Trigonométricas de Ángulos Compuestos" }
+        ]
+      }
+    ]
+}
+  
+--------------------------------------------------------------------
+  {
+    "ejercicios": [
+      {
+        "idTema": "1.1",
+        "ejercicios": [
+          {
+            "idEjercicio": "1.1.1",
+            "nivel": 1,
+            "rutaImagen": "/ruta/imagenes/exponente1_ej1.png",
+            "respuestaCorrecta": "5"
+          },
+          {
+            "idEjercicio": "1.1.2",
+            "nivel": 1,
+            "rutaImagen": "/ruta/imagenes/exponente1_ej2.png",
+            "respuestaCorrecta": "10"
+          },
+          {
+            "idEjercicio": "1.1.3",
+            "nivel": 2,
+            "rutaImagen": "/ruta/imagenes/exponente1_ej3.png",
+            "respuestaCorrecta": "15"
+          },
+          {
+            "idEjercicio": "1.1.4",
+            "nivel": 3,
+            "rutaImagen": "/ruta/imagenes/exponente1_ej4.png",
+            "respuestaCorrecta": "20"
+          }
+        ]
+      },
+      {
+        "idTema": "1.2",
+        "ejercicios": [
+          {
+            "idEjercicio": "1.2.1",
+            "nivel": 1,
+            "rutaImagen": "/ruta/imagenes/exponente2_ej1.png",
+            "respuestaCorrecta": "8"
+          },
+          {
+            "idEjercicio": "1.2.2",
+            "nivel": 2,
+            "rutaImagen": "/ruta/imagenes/exponente2_ej2.png",
+            "respuestaCorrecta": "12"
+          },
+          {
+            "idEjercicio": "1.2.3",
+            "nivel": 4,
+            "rutaImagen": "/ruta/imagenes/exponente2_ej3.png",
+            "respuestaCorrecta": "25"
+          },
+          {
+            "idEjercicio": "1.2.4",
+            "nivel": 5,
+            "rutaImagen": "/ruta/imagenes/exponente2_ej4.png",
+            "respuestaCorrecta": "30"
+          }
+        ]
+      }
+    ]
+  }
+  
+-- Estructura del JSON de Entrada
+  {
+    "temasAIncluir": [
+      {
+        "idTema": "1.1",
+        "numPreguntas": 3,
+        "nivelesDificultad": [1, 2]
+      },
+      {
+        "idTema": "1.2",
+        "numPreguntas": 2,
+        "nivelesDificultad": [2, 3]
+      }
+    ]
+  }
+  
+--- Estructura del JSON de Salida
+
+{
+    "examen": [
+      {
+        "idPregunta": "E1",
+        "idTema": "1.1",
+        "idEjercicio": "1.1.1",
+        "nivel": 1,
+        "rutaImagen": "/ruta/imagenes/exponente1_ej1.png"
+      },
+      {
+        "idPregunta": "E2",
+        "idTema": "1.1",
+        "idEjercicio": "1.1.3",
+        "nivel": 2,
+        "rutaImagen": "/ruta/imagenes/exponente1_ej3.png"
+      },
+      {
+        "idPregunta": "E3",
+        "idTema": "1.1",
+        "idEjercicio": "1.1.2",
+        "nivel": 1,
+        "rutaImagen": "/ruta/imagenes/exponente1_ej2.png"
+      },
+      {
+        "idPregunta": "E4",
+        "idTema": "1.2",
+        "idEjercicio": "1.2.2",
+        "nivel": 2,
+        "rutaImagen": "/ruta/imagenes/exponente2_ej2.png"
+      },
+      {
+        "idPregunta": "E5",
+        "idTema": "1.2",
+        "idEjercicio": "1.2.3",
+        "nivel": 3,
+        "rutaImagen": "/ruta/imagenes/exponente2_ej3.png"
+      }
+    ]
+  }
+  
+
+--- planteamiento basico
+En un colegio los alumnos de 3ro de secundaria se tiene el historial de calificaciones (0 a 20) de los alumnos
+con es información se planea hacer una aplicación que sea capaz de analizar esa información y poder generar
+nuevos examanes donde se puede hacer un reforzamiento sobre los temas de los cueles tienen debilidad, el
+sistema debe poder de aprender de si mismo y saber cuales son los ejercicios que resultan mejor para el
+aprendizaje así que los comenzara a rankear para que haya mayor probabilidad de presentarlos en los proximos examenes, 
+el sistema debe estar en la capacidad de porponer examenes que les puedan ayudar a ir mejorando y se que hay un tema
+en el cual son debiles les dara preguntas más sencillas, y si obtiene mejores resultados, le comenzara a subir el nivel.
+
+
+Get-ChildItem -Path "F:\www.elmofamadi.com\COREL\PROCESADAS" -Filter "*.mp4" -File -Force -Recurse | Select-Object -ExpandProperty Name | Out-File -FilePath "F:\www.elmofamadi.com\listado_mp4.txt"
+
+
+# Define la ruta de la carpeta donde buscar los archivos .mp4
+$ruta = "G:\SRC\TNSNAME\Nueva carpeta"
+
+# Obtiene una lista de los archivos .mp4 incluyendo subcarpetas
+$listaArchivos = Get-ChildItem -Path $ruta -Filter "*.mp4" -File -Force -Recurse | Select-Object -ExpandProperty FullName
+
+# Opcional: Si deseas usar rutas relativas en lugar de rutas completas
+$listaArchivos = $listaArchivos | ForEach-Object {
+    $_.Replace($ruta, "").TrimStart("\", "/")
+}
+
+# Crea un objeto con la estructura deseada
+$resultado = @{ "listaMp4" = $listaArchivos }
+
+# Convierte el objeto a formato JSON
+$json = $resultado | ConvertTo-Json
+
+# Guarda el JSON en un archivo
+$json | Out-File -FilePath "F:\www.elmofamadi.com\listado_mp4.json" -Encoding UTF8
+
+
+---------------------------------------------------------
+
+
+# Define la ruta de la carpeta donde se encuentran los archivos
+$ruta = "G:\SRC\TNSNAME\Nueva carpeta\TRN_DESCARGAS"
+
+# Obtiene todos los archivos dentro de la carpeta y sus subcarpetas, incluyendo archivos ocultos
+Get-ChildItem -Path $ruta -File -Recurse -Force | ForEach-Object {
+
+    # Almacena el nombre base (sin extensión) y la extensión del archivo
+    $nombreBase = $_.BaseName
+    $extension = $_.Extension
+
+    # Reemplaza guiones bajos y guiones por espacios en el nombre base
+    $nombreBase = $nombreBase -Replace '[_-]', ' '
+
+    # Reemplaza los puntos por espacios en el nombre base
+    $nombreBase = $nombreBase -Replace '\.', ' '
+
+    # Construye el nuevo nombre del archivo
+    $nuevoNombre = "$nombreBase$extension"
+
+    # Renombra el archivo
+    Rename-Item -Path $_.FullName -NewName $nuevoNombre
+}
+
+
+# Define la ruta de la carpeta donde se encuentran los archivos
+$ruta = "G:\SRC\TNSNAME\Nueva carpeta\TRN_DESCARGAS"
+# Define el texto a buscar y el texto de reemplazo
+$textoAReemplazar = "emilywillis"
+$nuevoTexto = "Emily Willis"
+# Obtiene todos los archivos dentro de la carpeta y sus subcarpetas, incluyendo archivos ocultos
+Get-ChildItem -Path $ruta -File -Recurse -Force | ForEach-Object {
+    # Verifica si el nombre del archivo contiene el texto a reemplazar
+    if ($_.Name -like "*$textoAReemplazar*") {
+        # Reemplaza el texto en el nombre del archivo
+        $nuevoNombre = $_.Name -Replace $textoAReemplazar, $nuevoTexto
+        # Construye la ruta completa para el nuevo nombre
+        $nuevaRuta = Join-Path -Path $_.DirectoryName -ChildPath $nuevoNombre
+        # Verifica si ya existe un archivo con el nuevo nombre
+        if (-not (Test-Path -Path $nuevaRuta)) {
+            # Renombra el archivo
+            Rename-Item -Path $_.FullName -NewName $nuevoNombre
+        } else {
+            # Si el archivo ya existe, muestra un mensaje
+            Write-Host "El archivo '$nuevoNombre' ya existe en la carpeta '$($_.DirectoryName)'. Se omite el renombrado." -ForegroundColor Yellow
+        }
+    }
+}

@@ -1,0 +1,59 @@
+<div class="container">
+  <!-- Antes de completar -->
+  <div *ngIf="!examCompleted && exam">
+    <div>
+      <h2>{{ exam.ExamName }}</h2>
+      <p>{{ exam.Description }}</p>
+      <p>
+        <strong>Asignatura:</strong> {{ exam.Subject }} &nbsp;
+        <strong>Duración:</strong> {{ exam.DurationMinutes }} minutos
+      </p>
+    </div>
+
+    <form>
+      <!-- Solo muestra preguntas hasta el índice actual -->
+      <div *ngFor="let item of exercises; let i = index">
+        <div *ngIf="i <= currentQuestionIndex" class="card my-3 p-3">
+          <h4>Ejercicio {{ i + 1 }} ({{ item.exercise.ExerciseCod }})</h4>
+          <img *ngIf="getImageUrl(item)" [src]="getImageUrl(item)"
+               alt="Ejercicio {{ i + 1 }}"
+               style="height:200px; width:auto;">
+          <p>
+            <strong>Dificultad:</strong> {{ item.examExercise.DifficultyLevel }}
+            &nbsp;
+            <strong>Puntos:</strong> {{ item.examExercise.Points }}
+          </p>
+          <div class="form-group">
+            <label [for]="'answer' + i">Tu respuesta:</label>
+            <div class="input-group">
+              <input
+                type="text"
+                [id]="'answer' + i"
+                class="form-control"
+                [(ngModel)]="item.userAnswer"
+                [name]="'answer' + i"
+                [disabled]="i < currentQuestionIndex">
+              <div class="input-group-append" *ngIf="i === currentQuestionIndex">
+                <button
+                  class="btn btn-secondary"
+                  type="button"
+                  (click)="confirmAnswer(item)">
+                  Confirmar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Después de completar -->
+  <div *ngIf="examCompleted && examResult">
+    <h2>Resultados del Examen</h2>
+    <p><strong>Clasificación Global:</strong> {{ examResult.global_reclassification.global_classification }}</p>
+    <p><strong>Promedio de Puntos:</strong> {{ examResult.global_reclassification.avg_points }}</p>
+    <p><strong>Puntuación Total:</strong> {{ examResult.total_score }}</p>
+    <p>{{ examResult.message }}</p>
+  </div>
+</div>

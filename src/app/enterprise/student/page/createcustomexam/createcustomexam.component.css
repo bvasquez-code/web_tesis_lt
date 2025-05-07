@@ -1,0 +1,194 @@
+/* -------------------
+   TARJETA ESTILO FIFA
+   ------------------- */
+   .student-card {
+    width: 100%;
+    background: #ffffff;
+    color: #1b1a1a;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+    font-family: sans-serif;
+  }
+  .student-card .header {
+    padding: 12px;
+    background: #ffffff;
+    text-align: center;
+  }
+  .student-card .header h2 {
+    margin: 0;
+    font-size: 1.2em;
+  }
+  .student-card .header .gpa {
+    font-size: 0.85em;
+    opacity: 0.75;
+  }
+    
+  /* Barras de progreso */
+  .stats-list {
+    list-style: none;
+    padding: 0 12px 12px;
+    margin: 0;
+  }
+  .stats-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .stats-list li .label {
+    width: 100px;
+    font-size: 0.85em;
+  }
+  .stats-list li .bar {
+    flex: 1;
+    height: 6px;
+    margin: 0 8px;
+    background: #444;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stats-list li .bar::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #36A2EB, #4BC0C0);
+    transition: width 1s ease;
+  }
+  .stats-list li .bar:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: -24px;
+    left: calc(var(--pct) * 1%);
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 1;
+  }
+  .stats-list li .bar::after {
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .stats-list li .value {
+    width: 28px;
+    text-align: right;
+    font-size: 0.85em;
+  }
+  
+
+/* ------------------------------------------------
+       Contenedor: SIN clip-path para no recortar hijos
+       ------------------------------------------------ */
+       .outer-hexagon {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        margin: 60px auto;
+        overflow: visible; /* permite que las etiquetas sobresalgan */
+      }
+  
+      /* ------------------------------------------------
+         Pseudo-elemento: aquí sí dibujamos el hexágono
+         ------------------------------------------------ */
+      .outer-hexagon::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: #4BC0C0;
+        clip-path: polygon(
+            50%   0%,    /* vértice superior */
+            93.3% 25%,   /* punto superior-derecha */
+            93.3% 75%,   /* punto inferior-derecha */
+            50%   100%,  /* vértice inferior */
+            6.7%  75%,   /* punto inferior-izquierda */
+            6.7%  25%    /* punto superior-izquierda */
+        );
+        z-index: 1;  /* fondo */
+      }
+  
+      /* ------------------------------------------------
+         Hexágono interior: relleno y clip-path propio
+         ------------------------------------------------ */
+      .inner-hexagon {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 190px; height: 190px;
+        background: #36A2EB;
+        clip-path: polygon(
+          25% 0%,   75% 0%,
+          100% 50%,
+          75% 100%, 25% 100%,
+          0% 50%
+        );
+        z-index: 2;  /* encima del fondo */
+      }
+  
+      /* ------------------------------------------------
+         Etiquetas: estilo y z-index más alto
+         ------------------------------------------------ */
+      .hex-label {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        padding: 2px 6px;
+        font-size: 0.85rem;
+        border-radius: 4px;
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 3; /* siempre al frente */
+      }
+  
+      /* ------------------------------------------------
+         Posición justo fuera de cada vértice
+         ------------------------------------------------ */
+/* 1) Vértice superior (50% 0%) */
+.hex-label-1 {
+    top:   0%;
+    left:  50%;
+    transform: translate(-50%, -100%);
+  }
+  
+  /* 2) Vértice superior-derecha (93.3% 25%) */
+  .hex-label-2 {
+    top:   25%;
+    left:  93.3%;
+    transform: translate(0%, -100%);
+  }
+  
+  /* 3) Vértice inferior-derecha (93.3% 75%) */
+  .hex-label-3 {
+    top:   75%;
+    left:  93.3%;
+    transform: translate(0, -50%);
+  }
+  
+  /* 4) Vértice inferior (50% 100%) */
+  .hex-label-4 {
+    top:   100%;
+    left:  50%;
+    transform: translate(-50%, 0);
+  }
+  
+  /* 5) Vértice inferior-izquierda (6.7% 75%) */
+  .hex-label-5 {
+    top:   75%;
+    left:  6.7%;
+    transform: translate(-100%, -50%);
+  }
+  
+  /* 6) Vértice superior-izquierda (6.7% 25%) */
+  .hex-label-6 {
+    top:   25%;
+    left:  6.7%;
+    transform: translate(-100%, -100%);
+  }
+  
+  

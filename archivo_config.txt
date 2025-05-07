@@ -1,0 +1,25 @@
+docker build -t app-ccadmin . 
+
+docker run -d -p 9001:8080 app-ccadmin
+
+docker images
+
+docker rmi -f app-ccadmin
+
+docker rmi -f mysql
+
+docker cp "F:\proyectos\mysql\docker\ccadmin\db_store_01_backup.sql" mysql-container:/db_store_01_backup.sql
+
+
+
+docker logs db-ccadmin-mysql
+
+docker rm db-ccadmin-mysql
+
+docker exec -it db-ccadmin-mysql mysql -uroot -p
+
+-------------------------------------------------
+
+ng generate component ProductModal
+
+ng g c enterprise/sale/modal/productinfosalemodal
