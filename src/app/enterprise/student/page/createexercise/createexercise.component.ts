@@ -116,10 +116,13 @@ export class CreateexerciseComponent implements OnInit {
   async save() {
     // Asignar los valores de cada control al DTO  
     // (ExerciseID se asigna automáticamente en modo edición; para registro nuevo se omite)
+    if(!this.ExerciseRegister){
+      this.ExerciseRegister = new ExerciseRegisterDto();
+    }
     this.ExerciseRegister.exercise.ExerciseCod = this.txtExerciseCod.nativeElement.value;
     this.ExerciseRegister.exercise.TopicID = Number(this.txtTopicID.nativeElement.value);
     this.ExerciseRegister.exercise.Level = Number(this.txtLevel.nativeElement.value);
-    this.ExerciseRegister.exercise.CorrectAnswer = this.txtCorrectAnswer.nativeElement.value;
+    this.ExerciseRegister.exercise.CorrectAnswer = String(this.txtCorrectAnswer.nativeElement.value).toUpperCase();
     this.ExerciseRegister.base64Image = this.base64Image;
 
     // Validación básica de campos obligatorios
@@ -140,7 +143,6 @@ export class CreateexerciseComponent implements OnInit {
    */
   validate(ExerciseRegister: ExerciseRegisterDto): boolean {
     try {
-      this.validation.validateIsNotEmpty(ExerciseRegister.exercise.ExerciseCod, "Debe ingresar el código del ejercicio");
       this.validation.validateIsNotEmpty(ExerciseRegister.exercise.TopicID.toString(), "Debe ingresar el ID del tema");
       this.validation.validateIsNotEmpty(ExerciseRegister.exercise.Level.toString(), "Debe ingresar el nivel de dificultad");
       this.validation.validateIsNotEmpty(ExerciseRegister.exercise.CorrectAnswer, "Debe ingresar la respuesta correcta");

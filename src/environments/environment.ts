@@ -10,7 +10,9 @@ export const environment = {
   urlDefault: 'https://portal.farmaciasperuanas.pe/login',
   settings: {
     backend: "http://localhost:8090",
+    // backend : "https://svx2xm5s-8090.brs.devtunnels.ms",
     backend_ia : 'http://localhost:4000'
+    // backend_ia : "https://svx2xm5s-4000.brs.devtunnels.ms"
   }
 };
 

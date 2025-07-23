@@ -192,3 +192,37 @@
   }
   
   
+  /* Cada fila de progreso */
+.progress-item {
+  margin-bottom: 1rem;
+}
+
+/* Etiqueta encima de la barra */
+.progress-label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  text-transform: capitalize;
+}
+
+/* Fondo de la barra (track) */
+.progress-track {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  height: 1.5rem;
+  overflow: hidden;
+}
+
+/* Parte rellenada según el porcentaje */
+.progress-fill {
+  height: 100%;
+  background-color: #3b82f6; /* azul */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: width 0.3s ease;
+  white-space: nowrap;
+}

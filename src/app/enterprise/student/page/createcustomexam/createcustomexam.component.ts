@@ -34,6 +34,13 @@ export class CreatecustomexamComponent implements OnInit {
   // Esta propiedad recibirá el clip-path dinámico
   public radarClipPath = '';
 
+  json = {
+    data: [
+      { key: 'fuerza',    value: 30 },
+      { key: 'velocidad', value: 70 }
+    ]
+  };
+
   constructor(
     private examService: ExamService,
     private toastr: ToastrService,
@@ -53,7 +60,30 @@ export class CreatecustomexamComponent implements OnInit {
         const data: StudentWeakTopicsResponseDTO = response.Data;
         this.studentWeakTopics = response.Data;
         if (this.studentWeakTopics.CourseWeaknessRanking.length > 0) {
-          this.selectedAttemptCourse = this.studentWeakTopics.CourseWeaknessRanking[0].Course;
+          this.selectedAttemptCourse = this.studentWeakTopics.CourseWeaknessRanking[0].course;
+        }
+        
+
+        for (const course of this.studentWeakTopics.CourseWeaknessRanking) {
+          if(course.course == "trigonometria"){
+            this.trigonometria = course.averagePerformance;
+          }
+          if(course.course == "aritmetica"){
+            this.aritmetica = course.averagePerformance;
+          }
+          if(course.course == "geometria"){
+            
+            this.geometria = course.averagePerformance;
+          }
+          if(course.course == "algebra"){
+            this.algebra = course.averagePerformance;
+          }
+          if(course.course == "velocidadResolucion"){
+            this.velocidadResolucion = course.averagePerformance;
+          }
+          if(course.course == "precisionResolucion"){
+            this.precisionResolucion = course.averagePerformance;
+          }
         }
         this.setMetrics();
       } else {
@@ -66,7 +96,7 @@ export class CreatecustomexamComponent implements OnInit {
   }
 
   get lowCoursePerformance(): boolean {
-    return this.studentWeakTopics.CourseWeaknessRanking && this.studentWeakTopics.CourseWeaknessRanking.some(c => c.AveragePerformance < 5);
+    return this.studentWeakTopics.CourseWeaknessRanking && this.studentWeakTopics.CourseWeaknessRanking.some(c => c.averagePerformance < 5);
   }
 
   get highTopicFailure(): boolean {
@@ -86,6 +116,7 @@ export class CreatecustomexamComponent implements OnInit {
   
     // Construir el request usando el DTO GenerateExercisesRequestDto
     const requestDto :any = { student_id : studentId};
+    
 
     
     try {
@@ -222,6 +253,9 @@ export class CreatecustomexamComponent implements OnInit {
     });
     this.radarClipPath = `polygon(${points.join(', ')})`;
   }
+  
+
+  
 
 
   

@@ -32,6 +32,7 @@
                 <input type="text"
                        id="txtExerciseCod"
                        class="form-control col-sm-8 col-md-6"
+                       [readonly]="true"
                        #txtExerciseCod>
               </div>
             </div>
@@ -126,7 +127,8 @@
               <div class="col-sm-3 col-form-label text-sm-right pr-0">
                 <label for="txtCorrectAnswer" class="mb-0"></label>
               </div>
-              <div class="col-sm-9">
+              <div class="col-sm-9" *ngIf="imageToDisplay">
+                <p>Vista previa de la imagen:</p>
                 <img [src]="imageToDisplay" alt="Imagen subida">
               </div>
             </div>

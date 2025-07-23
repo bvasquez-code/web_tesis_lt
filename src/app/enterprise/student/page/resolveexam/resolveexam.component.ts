@@ -191,6 +191,6 @@ export class ResolveexamComponent implements OnInit {
   }
 
   getImageUrl(item: ExamExerciseItemDto): string {
-    return '/assets/public/image/excerciseDefault.png';
+    return item.exercise.ImagePath;
   }
 }

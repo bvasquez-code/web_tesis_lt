@@ -1,9 +1,9 @@
 export class CourseWeaknessRankingDto {
-    Course: string = "";
-    AveragePerformance: number = 0;
+    course: string = "";
+    averagePerformance: number = 0;
 
     constructor(){
-        this.Course = "";
-        this.AveragePerformance = 0;
+        this.course = "";
+        this.averagePerformance = 0;
     }
   }

@@ -38,6 +38,10 @@ export class ListexerciseComponent implements OnInit, ActionTableService<Exercis
       return item.Status === "Inactive";
     };
 
+    const existImage = (item: ExerciseEntity) => {
+      return (item.ImagePath !== null && item.ImagePath !== "") ? "SI" : "NO";
+    };
+
     data.init(
       [
         { Name: "Exercise Code", key: "ExerciseCod" },
@@ -45,6 +49,7 @@ export class ListexerciseComponent implements OnInit, ActionTableService<Exercis
         { Name: "Level", key: "Level" },
         { Name: "Correct Answer", key: "CorrectAnswer" },
         { Name: "Modification", key: "ModifyDate", IsDate: true },
+        { Name: "Image", key: "Image" ,FunctionKey: existImage },
         { 
           Name: "Status", 
           key: "Status", 

@@ -1,12 +1,14 @@
 {
   "name": "web-ccadmin",
   "version": "0.0.0",
+  "homepage": "https://bvasquez-code.github.io/web_tesis_lt",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy" : "npm run build && gh-pages -d dist/web_ccadmin"
   },
   "private": true,
   "dependencies": {
@@ -20,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^15.2.10",
     "@angular/router": "^15.2.10",
     "@ng-bootstrap/ng-bootstrap": "^14.0.1",
+    "gh-pages": "^6.3.0",
     "ngx-toastr": "^16.0.2",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.15.3",

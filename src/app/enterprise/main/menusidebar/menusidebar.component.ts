@@ -469,7 +469,7 @@ export class MenusidebarComponent implements OnInit {
       MainMenu.list_sub_menu.push(ListStudentTopicPerformance);
     }
     
-    if (this.dataSesionService.PermissionExists("ESC00002")){
+    if (this.dataSesionService.PermissionExists("ESC0000X")){
       MainMenu.list_sub_menu.push(ResolveExam);
     }
 
@@ -479,7 +479,7 @@ export class MenusidebarComponent implements OnInit {
     RegisterStudent.des_menu = "Registrar Estudiante";
     RegisterStudent.icono = "nav-icon fa fa-user-plus"; 
 
-    if (this.dataSesionService.PermissionExists("ESC00000")){
+    if (this.dataSesionService.PermissionExists("ESC0000X")){
       MainMenu.list_sub_menu.push(RegisterStudent);
     }
 
@@ -489,9 +489,10 @@ export class MenusidebarComponent implements OnInit {
     CreateCustomExam.des_menu = "Crear Examen Personalizado";
     CreateCustomExam.icono = "nav-icon fa fa-plus-circle";
 
-    if (this.dataSesionService.PermissionExists("ESC00004")){
+    if (this.dataSesionService.PermissionExists("ESC00007")){
       MainMenu.list_sub_menu.push(CreateCustomExam);
     }
+    
       
     return MainMenu;
   }

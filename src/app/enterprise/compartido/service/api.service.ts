@@ -70,9 +70,9 @@ export class ApiService {
         try {
           const response = await lastValueFrom(this.post<T>(url, body));
           return response;
-        } catch (error) {
+        } catch (error : any) {
           console.error('Error in executePostService', error);
-          throw error;
+          return error.error;
         }
     }
 
@@ -80,9 +80,9 @@ export class ApiService {
         try {
           const response = await lastValueFrom(this.get<T>(url, paramsObj));
           return response;
-        } catch (error) {
+        } catch (error :any) {
           console.error('Error in executeGetService', error);
-          throw error;
+          return error.error;
         }
     }
 
@@ -138,9 +138,9 @@ export class ApiService {
         try {
           const response : ResponseWsDto = await lastValueFrom(this.postAnonimo<ResponseWsDto>(URL, Request));
           return response;
-        } catch (error) {
+        } catch (error : any) {
           console.error('Error in executePostService', error);
-          throw error;
+          return error.error;
         }
     }
 
