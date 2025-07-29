@@ -1,29 +1,35 @@
-# Stage 1: Build Stage
-FROM node:20 AS builder
+# Etapa 1: build con Node.js
+FROM node:18-alpine AS builder
 
-# Establecer directorio de trabajo
+# Directorio de trabajo
 WORKDIR /app
 
-# Copiar archivos necesarios para la instalación de dependencias
+# Copiamos package.json y package-lock.json (si existe)
 COPY package*.json ./
 
-# Instalar dependencias
-RUN npm install
+# Instalamos dependencias
+RUN npm ci
 
-# Copiar todo el proyecto
+# Copiamos el resto del código
 COPY . .
 
-# Construir la aplicación en modo producción
+# Construimos en modo producción (configuración por defecto en angular.json)
 RUN npm run build
 
-# Stage 2: Serve Stage
-FROM nginx:alpine
+# Etapa 2: servidor estático con Nginx
+FROM nginx:stable-alpine
 
-# Copiar los archivos compilados desde la etapa de construcción
-COPY --from=builder /app/dist/web-ccadmin /usr/share/nginx/html
+# Eliminamos la configuración default de Nginx
+RUN rm /etc/nginx/conf.d/default.conf
 
-# Exponer el puerto
+# Copiamos nuestro archivo de configuración de Nginx
+COPY nginx.conf /etc/nginx/conf.d/
+
+# Copiamos los archivos generados por Angular al directorio público de Nginx
+COPY --from=builder /app/dist/web_ccadmin /usr/share/nginx/html
+
+# Exponemos el puerto 80
 EXPOSE 80
 
-# Iniciar el servidor Nginx
+# Arranque de Nginx en primer plano
 CMD ["nginx", "-g", "daemon off;"]
