@@ -23,7 +23,7 @@ FROM nginx:stable-alpine
 RUN rm /etc/nginx/conf.d/default.conf
 
 # Copiamos nuestro archivo de configuración de Nginx
-COPY nginx.conf /etc/nginx/conf.d/
+COPY default.conf /etc/nginx/conf.d/
 
 # Copiamos los archivos generados por Angular al directorio público de Nginx
 COPY --from=builder /app/dist/web_ccadmin /usr/share/nginx/html
