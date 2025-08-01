@@ -12,7 +12,8 @@ export const environment = {
     // backend: "http://localhost:8090",
     backend: 'https://wswatesis-production.up.railway.app',
     // backend : "https://svx2xm5s-8090.brs.devtunnels.ms",
-    backend_ia : 'http://localhost:4000'
+    // backend_ia : 'http://localhost:4000'
+    backend_ia: 'https://wswaexam-production.up.railway.app',
     // backend_ia : "https://svx2xm5s-4000.brs.devtunnels.ms"
   }
 };
