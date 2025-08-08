@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
 
   getName(){
     const user = this.dataSesionService.getSessionStorageDto();
-    return user.Names;
+    return user.Person ? `${user.Person.Names} ${user.Person.LastNames}` : 'Usuario';
   }
 
 }

@@ -1,4 +1,5 @@
 import { AppMenuEntity } from "../../menu/model/entity/AppMenuEntity";
+import { PersonEntity } from "../../person/model/entity/PersonEntity";
 
 export class SessionStorageDto{
 
@@ -18,6 +19,7 @@ export class SessionStorageDto{
     public SessionID : number = 0;
     public StoreCod : string = "";
     public AppMenuPermissions : AppMenuEntity[] = [];
+    public Person : PersonEntity = new PersonEntity();
 
     constructor()
     {

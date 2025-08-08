@@ -8,6 +8,7 @@ import { ExamAttemptInfoDto } from '../../model/dto/ExamAttemptInfoDto';
 import { StudentWeakTopicsResponseDTO } from '../../model/dto/StudentWeakTopicsResponseDTO';
 import { GenerateExercisesRequestDto } from '../../model/dto/GenerateExercisesRequestDto';
 import { Router } from '@angular/router';
+import { ObjectUtils } from 'src/app/enterprise/shared/helper/ObjectUtils';
 
 @Component({
   selector: 'app-createcustomexam',
@@ -24,12 +25,19 @@ export class CreatecustomexamComponent implements OnInit {
 
   selectedAttemptCourse: string = "";
 
-  public trigonometria = 100;
-  public aritmetica = 30;
-  public geometria = 75;
+  public trigonometria = 0;
+  public aritmetica = 0;
+  public geometria = 0;
   public algebra = 0;
-  public velocidadResolucion = 100;
-  public precisionResolucion = 85;
+
+  public velocidadResolucion = 0;
+  public precisionResolucion = 0;
+  public ConsistenciaResolucion = 0;
+  public CoberturaTematica = 0;
+  public TasaDeMejora = 0;
+  public RetencionDeConocimiento = 0;
+
+  public overallAssessment = 0;
 
   // Esta propiedad recibirá el clip-path dinámico
   public radarClipPath = '';
@@ -78,11 +86,24 @@ export class CreatecustomexamComponent implements OnInit {
           if(course.course == "algebra"){
             this.algebra = course.averagePerformance;
           }
-          if(course.course == "velocidadResolucion"){
+          if(course.course == "VelocidadResolucion"){
             this.velocidadResolucion = course.averagePerformance;
           }
-          if(course.course == "precisionResolucion"){
+          if(course.course == "PrecisionResolucion"){
             this.precisionResolucion = course.averagePerformance;
+          }
+
+          if(course.course == "ConsistenciaResolucion"){
+            this.ConsistenciaResolucion = course.averagePerformance;
+          }
+          if(course.course == "CoberturaTematica"){
+            this.CoberturaTematica = course.averagePerformance;
+          }
+          if(course.course == "TasaDeMejora"){
+            this.TasaDeMejora = course.averagePerformance;
+          }
+          if(course.course == "RetencionDeConocimiento"){
+            this.RetencionDeConocimiento = course.averagePerformance;
           }
         }
         this.setMetrics();
@@ -226,14 +247,36 @@ export class CreatecustomexamComponent implements OnInit {
    */
   private computeRadarClipPath(): void {
     // Array con tus 6 valores en el orden de los vértices
-    const vals = [
-      this.precisionResolucion,
-      this.velocidadResolucion,
-      this.geometria,
-      this.algebra,
-      this.aritmetica,
-      this.trigonometria      
+
+    let precisionResolucion = ObjectUtils.decode(Number(this.precisionResolucion),0,40,Number(this.precisionResolucion));
+    let velocidadResolucion = ObjectUtils.decode(Number(this.velocidadResolucion),0,40,Number(this.velocidadResolucion));
+    let ConsistenciaResolucion = ObjectUtils.decode(Number(this.ConsistenciaResolucion),0,40,Number(this.ConsistenciaResolucion));
+    let CoberturaTematica = ObjectUtils.decode(Number(this.CoberturaTematica),0,40,Number(this.CoberturaTematica));
+    let TasaDeMejora = ObjectUtils.decode(Number(this.TasaDeMejora),0,40,Number(this.TasaDeMejora));
+    let RetencionDeConocimiento = ObjectUtils.decode(Number(this.RetencionDeConocimiento),0,40,Number(this.RetencionDeConocimiento));
+
+    const valsOverallAssessment = [
+      Number(this.precisionResolucion),
+      Number(this.velocidadResolucion),
+      Number(this.ConsistenciaResolucion),
+      Number(this.CoberturaTematica),
+      Number(this.TasaDeMejora),
+      Number(this.RetencionDeConocimiento)
     ];
+
+    this.overallAssessment = valsOverallAssessment.reduce((a, b) => a + b, 0) / valsOverallAssessment.length;
+
+    const vals = [
+      Number(precisionResolucion),
+      Number(velocidadResolucion),
+      Number(ConsistenciaResolucion),
+      Number(CoberturaTematica),
+      Number(TasaDeMejora),
+      Number(RetencionDeConocimiento)
+    ];
+
+    
+
     // Ángulos (radianes) para cada eje, empezando arriba y girando en el sentido de las agujas
     const angles = [
       -Math.PI/2,     // arriba
@@ -255,8 +298,18 @@ export class CreatecustomexamComponent implements OnInit {
   }
   
 
+  getSessionStorageDto()
+    {
+        return this.dataSesionService.getSessionStorageDto();
+    }
   
 
+    getCourseWeaknessRankingSkill(){
+      return this.studentWeakTopics.CourseWeaknessRanking.filter(c => c.type === "habilidad");
+    }
 
+    getCourseWeaknessRankingCourse(){
+      return this.studentWeakTopics.CourseWeaknessRanking.filter(c => c.type === "curso");
+    }
   
 }

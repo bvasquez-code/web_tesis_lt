@@ -76,8 +76,8 @@
               <div class="form-group row">
                 <div class="student-card mb-4">
                   <div class="header">
-                    <h2>juanito</h2>
-                    <div class="gpa">GPA: {{ 100 | number:'1.1-2' }}</div>
+                    <h2>{{ getSessionStorageDto().Person.Names + " " + getSessionStorageDto().Person.LastNames }}</h2>
+                    <div class="gpa">VALORACIÓN: {{ overallAssessment | number:'1.1-2' }}</div>
                   </div>
                   <!-- depuracion-hexagono.html -->
                   <div class="outer-hexagon">
@@ -90,14 +90,14 @@
                     <!-- etiquetas en vértices -->
                     <span class="hex-label hex-label-1">Precisión</span>
                     <span class="hex-label hex-label-2">Vel. Resolución</span>
-                    <span class="hex-label hex-label-3">Geometría</span>
-                    <span class="hex-label hex-label-4">Álgebra</span>
-                    <span class="hex-label hex-label-5">Aritmética</span>
-                    <span class="hex-label hex-label-6">Trigonometría</span>
+                    <span class="hex-label hex-label-3">Consistencia resolución</span>
+                    <span class="hex-label hex-label-4">Cobertura temática</span>
+                    <span class="hex-label hex-label-5">Tasa de mejora</span>
+                    <span class="hex-label hex-label-6">Retención de conocimiento</span>
                   </div>
                   
-                  <div *ngFor="let item of studentWeakTopics.CourseWeaknessRanking" class="progress-item col-md-12">
-                  <div class="progress-label">{{ item.course }}</div>
+                  <div *ngFor="let item of getCourseWeaknessRankingSkill()" class="progress-item col-md-12">
+                  <div class="progress-label">{{ item.description }}</div>
                     <div class="progress-track">
                       <div class="progress-fill" [style.width.%]="item.averagePerformance"
                         [attr.aria-valuenow]="item.averagePerformance"  
@@ -128,7 +128,7 @@
               <h5 class="mb-2">Cursos</h5>
               <p class="text-muted small">El valor numérico indica el rendimiento promedio en el curso.</p>
               <ul class="list-group mb-3">
-                <li *ngFor="let course of studentWeakTopics.CourseWeaknessRanking" class="list-group-item d-flex justify-content-between align-items-center">
+                <li *ngFor="let course of getCourseWeaknessRankingCourse()" class="list-group-item d-flex justify-content-between align-items-center">
                   {{ course.course | titlecase }}
                   <span class="badge"
                     [ngClass]="{
@@ -168,7 +168,7 @@
                   <label for="attemptCourseSelect" class="col-sm-4 col-form-label text-sm-right font-weight-bold">Filtrar por Curso</label>
                   <div class="col-sm-8">
                     <select id="attemptCourseSelect" class="form-control" [(ngModel)]="selectedAttemptCourse" name="selectedAttemptCourse">
-                      <option *ngFor="let course of studentWeakTopics.CourseWeaknessRanking" [value]="course.course">
+                      <option *ngFor="let course of getCourseWeaknessRankingCourse()" [value]="course.course">
                         {{ course.course | titlecase }}
                       </option>
                     </select>

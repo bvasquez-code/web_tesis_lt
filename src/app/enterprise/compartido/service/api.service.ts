@@ -117,6 +117,7 @@ export class ApiService {
                 let sessionData : SessionStorageDto = sessionResponse.Data;
                 localStorage.setItem('UserCod', sessionData.UserCod);
                 localStorage.setItem('PersonCod', sessionData.PersonCod);
+                localStorage.setItem('Person', JSON.stringify(sessionData.Person));
                 localStorage.setItem('Email', sessionData.Email);
                 localStorage.setItem('SessionID', sessionData.SessionID.toString());
                 localStorage.setItem('Names', sessionData.Names);
