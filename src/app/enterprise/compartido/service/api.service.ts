@@ -123,7 +123,9 @@ export class ApiService {
                 localStorage.setItem('Names', sessionData.Names);
                 localStorage.setItem('StoreCod', sessionData.StoreCod);
                 localStorage.setItem('AppMenuPermissions', JSON.stringify(sessionData.AppMenuPermissions));
+                localStorage.setItem('UserProfile', JSON.stringify(sessionData.UserProfile));
                 location.reload();
+
               } else {
                 console.error('Session error:', sessionResponse.Message);
               }

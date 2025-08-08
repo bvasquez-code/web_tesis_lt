@@ -29,6 +29,7 @@ export class DataSesionService {
         this.g_SessionStorageDto.Names = this.ObtenerKeySesion( localStorage.getItem('Names') );
         this.g_SessionStorageDto.AppMenuPermissions = JSON.parse(this.ObtenerKeySesion( localStorage.getItem('AppMenuPermissions') ));
         this.g_SessionStorageDto.Person = JSON.parse(this.ObtenerKeySesion( localStorage.getItem('Person') ));
+        this.g_SessionStorageDto.UserProfile = JSON.parse(this.ObtenerKeySesion( localStorage.getItem('UserProfile') ));
     }
 
     private ObtenerKeySesion( valor : any ) : string
