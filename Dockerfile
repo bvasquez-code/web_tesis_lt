@@ -1,35 +1,30 @@
-# Etapa 1: build con Node.js
+# --------- Build (Node) ---------
 FROM node:18-alpine AS builder
-
-# Directorio de trabajo
 WORKDIR /app
 
-# Copiamos package.json y package-lock.json (si existe)
+# Dependencias primero para cachear mejor
 COPY package*.json ./
-
-# Instalamos dependencias
 RUN npm ci
 
-# Copiamos el resto del código
+# Código fuente y build
 COPY . .
-
-# Construimos en modo producción (configuración por defecto en angular.json)
+# Si usas Angular >=16 con builder nuevo, "npm run build" ya saca prod
 RUN npm run build
 
-# Etapa 2: servidor estático con Nginx
+# --------- Run (Nginx) ----------
 FROM nginx:stable-alpine
+WORKDIR /usr/share/nginx/html
 
-# Eliminamos la configuración default de Nginx
+# Limpia default y copia tu conf
 RUN rm /etc/nginx/conf.d/default.conf
-
-# Copiamos nuestro archivo de configuración de Nginx
+# Usa el nombre que REALMENTE tienes en el repo:
 COPY default.conf /etc/nginx/conf.d/
 
-# Copiamos los archivos generados por Angular al directorio público de Nginx
-COPY --from=builder /app/dist/web_ccadmin /usr/share/nginx/html
+# Copia artefactos Angular (ajusta ruta según tu versión/proyecto)
+# Angular 15 clásico:
+COPY --from=builder /app/dist/web_ccadmin ./
+# Angular 17+ (builder nuevo) suele generar /dist/web_ccadmin/browser
+# COPY --from=builder /app/dist/web_ccadmin/browser ./
 
-# Exponemos el puerto 80
 EXPOSE 80
-
-# Arranque de Nginx en primer plano
 CMD ["nginx", "-g", "daemon off;"]
