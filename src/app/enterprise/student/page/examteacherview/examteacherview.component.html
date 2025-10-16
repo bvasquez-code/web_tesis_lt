@@ -1,0 +1,48 @@
+<div class="container" *ngIf="!loading; else skel">
+  <ng-container *ngIf="exam; else noData">
+    <div class="header">
+      <h2>{{ exam.ExamName }}</h2>
+      <p>{{ exam.Description }}</p>
+      <p class="meta">
+        <strong>Asignatura:</strong> {{ exam.Subject }} &nbsp;
+        <strong>Duración:</strong> {{ exam.DurationMinutes }} min &nbsp;
+        <strong>Preguntas:</strong> {{ items.length }}
+      </p>
+      <button type="button" class="btn btn-sm btn-outline-secondary"
+              (click)="showAnswers = !showAnswers">
+        {{ showAnswers ? 'Ocultar respuestas' : 'Mostrar respuestas' }}
+      </button>
+    </div>
+
+    <div *ngFor="let it of items; let i = index; trackBy: trackByExercise" class="card my-3 p-3">
+      <h4>Ejercicio {{ i + 1 }} ({{ it.exercise.ExerciseCod }})</h4>
+
+      <div class="img-wrap" *ngIf="getImageUrl(it)">
+        <img class="exercise-img"
+             [src]="getImageUrl(it)"
+             [attr.alt]="'Ejercicio ' + (i + 1)"
+             loading="lazy"/>
+      </div>
+
+      <div class="row g-2 mt-2">
+        <div class="col-12 col-md">
+          <span class="badge text-bg-light">Dificultad: {{ it.examExercise.DifficultyLevel }}</span>
+        </div>
+        <div class="col-12 col-md">
+          <span class="badge text-bg-light">Puntos: {{ it.examExercise.Points }}</span>
+        </div>
+        <div class="col-12 col-md" *ngIf="showAnswers">
+          <span class="badge text-bg-success">Correcta: {{ it.exercise.CorrectAnswer }}</span>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #skel>
+  <div class="p-4">Cargando examen...</div>
+</ng-template>
+
+<ng-template #noData>
+  <div class="alert alert-warning mt-3">No hay datos para mostrar.</div>
+</ng-template>

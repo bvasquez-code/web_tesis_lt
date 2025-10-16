@@ -1,0 +1,67 @@
+<!-- enterprise/student/page/examstudentreview/examstudentreview.component.html -->
+<div class="container" *ngIf="!loading; else skel">
+  <ng-container *ngIf="exam; else noData">
+    <div class="header">
+      <h2>{{ exam.ExamName }}</h2>
+      <p>{{ exam.Description }}</p>
+      <p class="meta">
+        <strong>Asignatura:</strong> {{ exam.Subject }} &nbsp;
+        <strong>Duración:</strong> {{ exam.DurationMinutes }} min &nbsp;
+        <strong>Preguntas:</strong> {{ numQuestions }}
+      </p>
+
+      <div class="score card p-3 mb-3">
+        <div class="row g-2">
+          <div class="col-12 col-md">
+            <strong>Correctas:</strong> {{ numCorrect }}/{{ numQuestions }}
+          </div>
+          <div class="col-12 col-md">
+            <strong>Nota (puntos):</strong> {{ totalScore }} / {{ totalPointsPossible }}
+          </div>
+          <div class="col-12 col-md">
+            <strong>Porcentaje:</strong> {{ percent }}%
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let r of viewRows; trackBy: trackByRow" class="card my-3 p-3">
+      <h4>Ejercicio {{ r.idx }} ({{ r.exerciseCod }})</h4>
+
+      <div class="img-wrap" *ngIf="r.imageUrl">
+        <img class="exercise-img" [src]="r.imageUrl" [attr.alt]="'Ejercicio ' + r.idx" loading="lazy" />
+      </div>
+
+      <div class="row g-2 mt-2">
+        <div class="col-12 col-md">
+          <span class="badge text-label">Tu respuesta:</span>
+          <span class="badge" [ngClass]="getBadgeClass(r)">
+            {{ r.userAnswer || '—' }}
+          </span>
+        </div>
+        <div class="col-12 col-md">
+          <span class="badge text-label">Correcta:</span>
+          <span class="badge badge-neutral">{{ r.correctAnswer || '—' }}</span>
+        </div>
+        <div class="col-12 col-md">
+          <span class="badge text-label">Puntos:</span>
+          <span class="badge badge-neutral">{{ r.points }}</span>
+        </div>
+        <div class="col-12 col-md">
+          <span class="badge text-label">Puntos obtenidos:</span>
+          <span class="badge" [ngClass]="r.isCorrect ? 'badge-ok' : 'badge-bad'">
+            {{ r.earnedPoints }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #skel>
+  <div class="p-4">Cargando resultados...</div>
+</ng-template>
+
+<ng-template #noData>
+  <div class="alert alert-warning mt-3">No hay datos para mostrar.</div>
+</ng-template>

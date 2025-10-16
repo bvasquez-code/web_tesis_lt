@@ -1,49 +1,49 @@
 <!-- src/app/enterprise/student-exam-history/pages/list-student-exam-history/list-student-exam-history.component.html -->
 
 <div role="main" class="main-content">
-    <div class="page-content container container-plus">
-      <div class="card-header">
-        <h3 class="card-title text-125 text-primary-d2">
-          <i class="far fa-edit text-dark-l3 mr-1"></i>
-          Student Exam History
-        </h3>
-      </div>
+  <div class="page-content container container-plus">
+    <div class="card-header">
+    <h3 class="card-title text-125 text-primary-d2">
+      <i class="far fa-edit text-dark-l3 mr-1"></i>
+      Historial de Exámenes del Estudiante
+    </h3>
+    </div>
   
-      <div class="row">
-        <div class="col-12">
-          <div class="card dcard">
-            <div class="card-body px-1 px-md-3">
-              <div autocomplete="off">
-                <div class="d-flex justify-content-between flex-column flex-sm-row mb-3 px-2 px-sm-0">
-                  <!-- Botón para crear un nuevo intento (según el requerimiento) -->
-                  <div class="mb-2 mb-sm-0">
-                    <a class="btn px-4 btn-primary mb-1" href="/enterprise/student_exam_history/page/create">
-                      New Attempt
-                    </a>
-                  </div>
-                  <div class="pos-rel ml-sm-auto mr-sm-2 order-last order-sm-0">
-                    <i class="fa fa-search position-lc ml-25 text-primary-m1"></i>
-                    <input type="text" 
-                           class="form-control w-100 pl-45 radius-1 brc-primary-m4" 
-                           placeholder="Search..."
-                           #txtSearch>
-                  </div>
-                  <div class="mb-2 mb-sm-0">
-                    <a class="btn px-4 btn-primary mb-1" (click)="filter(1)">
-                      Search
-                    </a>
-                  </div>
-                </div>
-                <app-table  
-                  [data]="dataTablaGenetic" 
-                  [action]="this"
-                  (rowAction)="actionRowEvent($event)">
-                </app-table>
-              </div>
-            </div>
+    <div class="row">
+    <div class="col-12">
+      <div class="card dcard">
+      <div class="card-body px-1 px-md-3">
+        <div autocomplete="off">
+        <div class="d-flex justify-content-between flex-column flex-sm-row mb-3 px-2 px-sm-0">
+          <!-- Botón para crear un nuevo intento (según el requerimiento) -->
+          <div class="mb-2 mb-sm-0">
+          <a class="btn px-4 btn-primary mb-1" href="/enterprise/student_exam_history/page/create">
+            Nuevo intento
+          </a>
+          </div>
+          <div class="pos-rel ml-sm-auto mr-sm-2 order-last order-sm-0">
+          <i class="fa fa-search position-lc ml-25 text-primary-m1"></i>
+          <input type="text" 
+               class="form-control w-100 pl-45 radius-1 brc-primary-m4" 
+               placeholder="Buscar..."
+               #txtSearch>
+          </div>
+          <div class="mb-2 mb-sm-0">
+          <a class="btn px-4 btn-primary mb-1" (click)="filter(1)">
+            Buscar
+          </a>
           </div>
         </div>
+        <app-table  
+          [data]="dataTablaGenetic" 
+          [action]="this"
+          (rowAction)="actionRowEvent($event)">
+        </app-table>
+        </div>
+      </div>
       </div>
     </div>
+    </div>
+  </div>
   </div>
   

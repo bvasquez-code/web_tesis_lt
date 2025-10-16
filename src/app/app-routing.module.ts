@@ -44,6 +44,8 @@ import { ListstudenttopicperformanceComponent } from './enterprise/student/page/
 import { ResolveexamComponent } from './enterprise/student/page/resolveexam/resolveexam.component';
 import { RegisterstudentComponent } from './enterprise/student/page/registerstudent/registerstudent.component';
 import { CreatecustomexamComponent } from './enterprise/student/page/createcustomexam/createcustomexam.component';
+import { ExamteacherviewComponent } from './enterprise/student/page/examteacherview/examteacherview.component';
+import { ExamstudentreviewComponent } from './enterprise/student/page/examstudentreview/examstudentreview.component';
 
 const routes: Routes = [
   {
@@ -272,6 +274,14 @@ const routes: Routes = [
       {
         path: 'enterprise/student/page/createcustomexam',
         component: CreatecustomexamComponent
+      },
+      {
+        path: 'enterprise/student/page/examteacherview',
+        component: ExamteacherviewComponent
+      },
+      {
+        path: 'enterprise/student/page/examstudentreview',
+        component: ExamstudentreviewComponent
       }
     ]
   }

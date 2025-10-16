@@ -70,6 +70,8 @@ import { ResolveexamComponent } from './enterprise/student/page/resolveexam/reso
 import { FormsModule } from '@angular/forms';
 import { RegisterstudentComponent } from './enterprise/student/page/registerstudent/registerstudent.component';
 import { CreatecustomexamComponent } from './enterprise/student/page/createcustomexam/createcustomexam.component';
+import { ExamteacherviewComponent } from './enterprise/student/page/examteacherview/examteacherview.component';
+import { ExamstudentreviewComponent } from './enterprise/student/page/examstudentreview/examstudentreview.component';
 
 @NgModule({
   declarations: [
@@ -132,7 +134,9 @@ import { CreatecustomexamComponent } from './enterprise/student/page/createcusto
     ListstudenttopicperformanceComponent,
     ResolveexamComponent,
     RegisterstudentComponent,
-    CreatecustomexamComponent
+    CreatecustomexamComponent,
+    ExamteacherviewComponent,
+    ExamstudentreviewComponent
   ],
   imports: [
     BrowserModule,

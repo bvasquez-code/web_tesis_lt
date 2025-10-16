@@ -1,0 +1,25 @@
+.header { margin-bottom: 1rem; }
+.meta { margin: 0.5rem 0 1rem 0; }
+.score { background: #fbfbfb; border: 1px solid #eee; }
+
+.img-wrap {
+  height: 200px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+.exercise-img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.badge { padding: 0.4rem 0.6rem; border-radius: 14px; font-weight: 600; }
+.badge-ok { background: #e6f7ed; color: #117a41; border: 1px solid #bfe7cf; }
+.badge-bad { background: #fdecea; color: #b2301b; border: 1px solid #f5c2bf; }
+.badge-neutral { background: #eef1f6; color: #2f3b52; border: 1px solid #d9e0ea; }
+.text-label { background: #fff; color: #6b7280; border: 1px solid #e5e7eb; font-weight: 500; }

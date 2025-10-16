@@ -44,34 +44,34 @@ export class ListexerciseComponent implements OnInit, ActionTableService<Exercis
 
     data.init(
       [
-        { Name: "Exercise Code", key: "ExerciseCod" },
-        { Name: "Topic ID", key: "TopicID" },
-        { Name: "Level", key: "Level" },
-        { Name: "Correct Answer", key: "CorrectAnswer" },
-        { Name: "Modification", key: "ModifyDate", IsDate: true },
-        { Name: "Image", key: "Image" ,FunctionKey: existImage },
-        { 
-          Name: "Status", 
-          key: "Status", 
-          IsStatus: true,
-          Html: {
-            Active: 'badge badge-sm bgc-info-d1 text-white pb-1 px-25',
-            Inactive: 'badge badge-sm bgc-red-d1 text-white pb-1 px-25'
-          }
-        },
-        { 
-          Name: "Options", 
-          ColumnAction: true, 
-          Id: ["ExerciseID"],
-          Options: [
-            { Type: "Url", Name: "fa fa-pencil-alt", Url: "/enterprise/student/page/createexercise?ExerciseID={ExerciseID}" },
-            { Type: "Action", Name: "fa fa-trash-alt", Url: "#", ID: "delete", Function: viewButtonDelete },
-            { Type: "Action", Name: "fa fa-check", Url: "#", ID: "active", Function: viewButtonActive }
-          ]
+      { Name: "Código", key: "ExerciseCod" },
+      { Name: "ID del Tema", key: "TopicID" },
+      { Name: "Nivel", key: "Level" },
+      { Name: "Respuesta Correcta", key: "CorrectAnswer" },
+      { Name: "Fecha de Modificación", key: "ModifyDate", IsDate: true },
+      { Name: "Imagen", key: "Image" ,FunctionKey: existImage },
+      { 
+        Name: "Estado", 
+        key: "Status", 
+        IsStatus: true,
+        Html: {
+        Active: 'badge badge-sm bgc-info-d1 text-white pb-1 px-25',
+        Inactive: 'badge badge-sm bgc-red-d1 text-white pb-1 px-25'
         }
+      },
+      { 
+        Name: "Opciones", 
+        ColumnAction: true, 
+        Id: ["ExerciseID"],
+        Options: [
+        { Type: "Url", Name: "fa fa-pencil-alt", Url: "/enterprise/student/page/createexercise?ExerciseID={ExerciseID}" },
+        { Type: "Action", Name: "fa fa-trash-alt", Url: "#", ID: "delete", Function: viewButtonDelete },
+        { Type: "Action", Name: "fa fa-check", Url: "#", ID: "active", Function: viewButtonActive }
+        ]
+      }
       ],
       { data: responsePageSearch },
-      "Exercise List"
+      "Lista de Ejercicios"
     );
     this.dataTablaGenetic = data;
   }

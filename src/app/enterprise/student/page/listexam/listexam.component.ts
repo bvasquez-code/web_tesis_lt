@@ -38,34 +38,35 @@ export class ListexamComponent implements OnInit, ActionTableService<ExamEntity>
 
     data.init(
       [
-        { Name: "Exam ID", key: "ExamID" },
-        { Name: "Exam Name", key: "ExamName" },
-        { Name: "Description", key: "Description" },
-        { Name: "Subject", key: "Subject" },
-        { Name: "Duration (min)", key: "DurationMinutes" },
-        { Name: "Modification", key: "ModifyDate", IsDate: true },
+        { Name: "ID del Examen", key: "ExamID" },
+        { Name: "Nombre del Examen", key: "ExamName" },
+        { Name: "Descripción", key: "Description" },
+        { Name: "Asignatura", key: "Subject" },
+        { Name: "Duración (min)", key: "DurationMinutes" },
+        { Name: "Fecha de Modificación", key: "ModifyDate", IsDate: true },
         { 
-          Name: "Status", 
+          Name: "Estado", 
           key: "Status", 
           IsStatus: true,
           Html: {
-            Active: 'badge badge-sm bgc-info-d1 text-white pb-1 px-25',
-            Inactive: 'badge badge-sm bgc-red-d1 text-white pb-1 px-25'
+          Active: 'badge badge-sm bgc-info-d1 text-white pb-1 px-25',
+          Inactive: 'badge badge-sm bgc-red-d1 text-white pb-1 px-25'
           }
         },
         { 
-          Name: "Options", 
+          Name: "Opciones", 
           ColumnAction: true, 
           Id: ["ExamID"], 
           Options: [
             { Type: "Url", Name: "fa fa-pencil-alt", Url: "/enterprise/student/page/createexam?ExamID={ExamID}" },
+            { Type: "Url", Name: "fa fa-eye", Url: "/enterprise/student/page/examteacherview?ExamID={ExamID}" },
             { Type: "Action", Name: "fa fa-trash-alt", Url: "#", ID: "delete", Function: viewButtonDelete },
             { Type: "Action", Name: "fa fa-check", Url: "#", ID: "active", Function: viewButtonActive }
           ]
         }
       ],
       { data: responsePageSearch },
-      "Exam List"
+      "Lista de examenes"
     );
     this.dataTablaGenetic = data;
   }

@@ -1,0 +1,13 @@
+.img-wrap {
+  height: 300px;              /* alto fijo */
+  display: inline-flex;       /* o block/flex según tu layout */
+  align-items: center;        /* centra verticalmente si sobra espacio */
+  justify-content: center;    /* centra horizontalmente si sobra espacio */
+  overflow: hidden;           /* evita desbordes */
+}
+
+.exercise-img {
+  height: 100%;               /* usa todo el alto disponible */
+  width: 100%;                /* ocupa el ancho del wrapper */
+  object-fit: contain;        /* mantiene proporción sin recortar ni deformar */
+}

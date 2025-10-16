@@ -6,7 +6,8 @@
       <p>{{ exam.Description }}</p>
       <p>
         <strong>Asignatura:</strong> {{ exam.Subject }} &nbsp;
-        <strong>Duración:</strong> {{ exam.DurationMinutes }} minutos
+        <strong>Duración:</strong> {{ exam.DurationMinutes }} minutos &nbsp;
+        <strong>Número de preguntas :</strong> {{ exercises.length }}
       </p>
     </div>
 
@@ -15,9 +16,16 @@
       <div *ngFor="let item of exercises; let i = index">
         <div *ngIf="i <= currentQuestionIndex" class="card my-3 p-3">
           <h4>Ejercicio {{ i + 1 }} ({{ item.exercise.ExerciseCod }})</h4>
-          <img *ngIf="getImageUrl(item)" [src]="getImageUrl(item)"
-               alt="Ejercicio {{ i + 1 }}"
-               style="height:200px; width:auto;">
+          <div class="img-wrap">
+  <img
+    *ngIf="getImageUrl(item)"
+    [src]="getImageUrl(item)"
+    [attr.alt]="'Ejercicio ' + (i + 1)"
+    class="exercise-img"
+    loading="lazy"
+  />
+</div>
+
           <p>
             <strong>Dificultad:</strong> {{ item.examExercise.DifficultyLevel }}
             &nbsp;

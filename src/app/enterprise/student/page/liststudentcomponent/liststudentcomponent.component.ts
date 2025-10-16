@@ -55,38 +55,38 @@ export class ListstudentcomponentComponent implements OnInit, ActionTableService
 
     data.init(
       [
-        { Name: "Student ID", key: "StudentID" },
-        { Name: "First Name", key: "FirstName" },
-        { Name: "Last Name", key: "LastName" },
-        { Name: "Enrollment Date", key: "EnrollmentDate", IsDate: true },
-        { Name: "Grade Level", key: "GradeLevel" },
-        { Name: "Modification", key: "ModifyDate", IsDate: true },
-        { 
-          Name: "Status", 
-          key: "Status", 
-          IsStatus: true,
-          FunctionKey: StatusColumnHtml,
-          Html: {
-            Active: 'badge badge-sm bgc-info-d1 text-white pb-1 px-25',
-            Inactive: 'badge badge-sm bgc-red-d1 text-white pb-1 px-25'
-          }
-        },
-        { 
-          Name: "Options", 
-          ColumnAction: true, 
-          Id: ["StudentID"], 
-          Options: [
-            { Type: "Url", Name: "fa fa-pencil-alt", Url: "/enterprise/student/page/createstudent?StudentID={StudentID}" },
-            { Type: "Action", Name: "fa fa-trash-alt", Url: "#", ID: "delete", Function: viewButtonDelete },
-            { Type: "Action", Name: "fa fa-check", Url: "#", ID: "active", Function: viewButtonActive },
-            { Type: "Action", Name: "fa fa-envelope", Url: "#", ID: "invitation" }
-          ]
+      { Name: "ID Estudiante", key: "StudentID" },
+      { Name: "Nombre", key: "FirstName" },
+      { Name: "Apellido", key: "LastName" },
+      { Name: "Fecha de inscripción", key: "EnrollmentDate", IsDate: true },
+      { Name: "Grado", key: "GradeLevel" },
+      { Name: "Fecha de modificación", key: "ModifyDate", IsDate: true },
+      { 
+        Name: "Estado", 
+        key: "Status", 
+        IsStatus: true,
+        FunctionKey: StatusColumnHtml,
+        Html: {
+        Active: 'badge badge-sm bgc-info-d1 text-white pb-1 px-25',
+        Inactive: 'badge badge-sm bgc-red-d1 text-white pb-1 px-25'
         }
+      },
+      { 
+        Name: "Opciones", 
+        ColumnAction: true, 
+        Id: ["StudentID"], 
+        Options: [
+        { Type: "Url", Name: "fa fa-pencil-alt", Url: "/enterprise/student/page/createstudent?StudentID={StudentID}" },
+        { Type: "Action", Name: "fa fa-trash-alt", Url: "#", ID: "delete", Function: viewButtonDelete },
+        { Type: "Action", Name: "fa fa-check", Url: "#", ID: "active", Function: viewButtonActive },
+        { Type: "Action", Name: "fa fa-envelope", Url: "#", ID: "invitation" }
+        ]
+      }
       ],
       {
-        data: responsePageSearch
+      data: responsePageSearch
       },
-      "Student List"
+      "Lista de estudiantes"
     );
     this.dataTablaGenetic = data;
   }

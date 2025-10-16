@@ -9,6 +9,9 @@ import { StudentWeakTopicsResponseDTO } from '../../model/dto/StudentWeakTopicsR
 import { GenerateExercisesRequestDto } from '../../model/dto/GenerateExercisesRequestDto';
 import { Router } from '@angular/router';
 import { ObjectUtils } from 'src/app/enterprise/shared/helper/ObjectUtils';
+import { StudentService } from '../../service/StudentService';
+import { ResponseWsDto } from 'src/app/enterprise/shared/model/dto/ResponseWsDto';
+import { StudentExamHistoryStatusDto } from '../../model/dto/StudentExamHistoryStatusDto';
 
 @Component({
   selector: 'app-createcustomexam',
@@ -24,6 +27,11 @@ export class CreatecustomexamComponent implements OnInit {
   studentWeakTopics: StudentWeakTopicsResponseDTO = new StudentWeakTopicsResponseDTO();
 
   selectedAttemptCourse: string = "";
+  // NUEVO: bandera para el modal
+  showWelcomeModal: boolean = false;
+
+  // (opcional) evita doble clic en el botón del modal
+  startingEntryExam: boolean = false;
 
   public trigonometria = 0;
   public aritmetica = 0;
@@ -41,6 +49,7 @@ export class CreatecustomexamComponent implements OnInit {
 
   // Esta propiedad recibirá el clip-path dinámico
   public radarClipPath = '';
+  
 
   json = {
     data: [
@@ -52,12 +61,14 @@ export class CreatecustomexamComponent implements OnInit {
   constructor(
     private examService: ExamService,
     private toastr: ToastrService,
+    private studentService : StudentService,
     private dataSesionService: DataSesionService,
     private router: Router 
   ) {}
 
   ngOnInit(): void {
     this.loadStudentWeakTopics();
+    this.checkHistory();
   }
 
   async loadStudentWeakTopics(): Promise<void> {
@@ -311,5 +322,38 @@ export class CreatecustomexamComponent implements OnInit {
     getCourseWeaknessRankingCourse(){
       return this.studentWeakTopics.CourseWeaknessRanking.filter(c => c.type === "curso");
     }
-  
+
+    async checkHistory(): Promise<void> {
+       try {
+          const userCod = this.dataSesionService.getSessionStorageDto().UserCod;
+          const resp = await this.studentService.checkHistory(userCod);
+          let hasHistory = false;
+          if (!resp?.ErrorStatus) {
+            const status : StudentExamHistoryStatusDto = resp.Data;
+
+            if(!status.IsMaster){
+              hasHistory = status.HasHistory;
+              if (!hasHistory) this.showWelcomeModal = true;
+            }
+
+          }
+
+          
+        } catch (e) {
+          console.error('checkHistory error', e);
+        }
+  }
+
+  // NUEVO: botón del modal -> genera examen de entrada y cierra modal
+  async onStartWithEntryExam(): Promise<void> {
+    if (this.startingEntryExam) return;
+    this.startingEntryExam = true;
+    try {
+      await this.generateEntryExam();
+      this.showWelcomeModal = false;
+    } finally {
+      this.startingEntryExam = false;
+    }
+  }
+    
 }

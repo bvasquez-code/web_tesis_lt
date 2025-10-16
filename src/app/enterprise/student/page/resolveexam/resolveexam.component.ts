@@ -17,7 +17,8 @@ import { ExamSubmissionDto } from '../../model/dto/ExamSubmissionDto';
 
 @Component({
   selector: 'app-resolveexam',
-  templateUrl: './resolveexam.component.html'
+  templateUrl: './resolveexam.component.html',
+  styleUrls: ['./resolveexam.component.css']
 })
 export class ResolveexamComponent implements OnInit {
 
@@ -107,6 +108,20 @@ export class ResolveexamComponent implements OnInit {
 
   /** Confirma la respuesta actual y avanza a la siguiente */
   async confirmAnswer(item: ExamExerciseItemDto): Promise<void> {
+
+    const responseList : string[] = ['A','B','C','D','E'];
+    
+    
+    if(!item.userAnswer || item.userAnswer.trim() === '') {
+      this.toastr.warning('Debe ingresar una respuesta antes de confirmar.', 'Atención');
+      return;
+    }
+
+    if(item.userAnswer && !responseList.includes(item.userAnswer.trim().toUpperCase())) {
+      this.toastr.warning('La respuesta debe ser una de las siguientes opciones: A, B, C, D, E.', 'Atención');
+      return;
+    }
+
     // respaldo parcial idéntico al ejemplo anterior...
     const results = this.exercises.map(it => ({
       ExerciseCod: it.exercise.ExerciseCod,

@@ -489,10 +489,30 @@ export class MenusidebarComponent implements OnInit {
     CreateCustomExam.des_menu = "Crear Examen Personalizado";
     CreateCustomExam.icono = "nav-icon fa fa-plus-circle";
 
+    let TeacherExamView: SubMenuPagina = new SubMenuPagina();
+    TeacherExamView.url = "enterprise/student/page/examteacherview";
+    TeacherExamView.url_position = "enterprise/student/page/listexam";
+    TeacherExamView.des_menu = "Ver Examen (Profesor)";
+    TeacherExamView.icono = "nav-icon fa fa-eye";
+
+    let StudentExamReview: SubMenuPagina = new SubMenuPagina();
+    StudentExamReview.url = "enterprise/student/page/examstudentreview";
+    StudentExamReview.url_position = "enterprise/student/page/examstudentreview";
+    StudentExamReview.des_menu = "Mi Examen (Resultado)";
+    StudentExamReview.icono = "nav-icon fa fa-clipboard-check";
+
+
     if (this.dataSesionService.PermissionExists("ESC00007")){
       MainMenu.list_sub_menu.push(CreateCustomExam);
     }
     
+    if (this.dataSesionService.PermissionExists("ESC00008")) {
+      MainMenu.list_sub_menu.push(TeacherExamView);
+    }
+
+    if (this.dataSesionService.PermissionExists("ESC00009")){
+      MainMenu.list_sub_menu.push(StudentExamReview);
+    }
       
     return MainMenu;
   }

@@ -60,4 +60,10 @@ export class StudentService {
     const response: ResponseWsDto = await this.apiService.ExecutePostServiceAnonimo(url, dto);
     return response;
   }
+
+  async checkHistory(studentId: String): Promise<ResponseWsDto> {
+    const url: string = `${AppSetting.API}/api/v1/student/checkHistory`;
+    const RespuestaWS: ResponseWsDto = await this.apiService.ExecuteGetService(url, {StudentID: studentId});
+    return RespuestaWS;
+  }
 }

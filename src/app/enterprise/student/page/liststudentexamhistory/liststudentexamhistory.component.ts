@@ -34,6 +34,10 @@ export class ListstudentexamhistoryComponent implements OnInit, ActionTableServi
       return item.IsCompleted === 0; // 0: En curso
     };
 
+    const viewButtonResult = (item: StudentExamHistoryEntity) => {
+      return item.IsCompleted !== 0; // 0: En curso
+    };
+
     // Función que muestra el botón para eliminar el intento (solo si ya está completado)
     const viewButtonDelete = (item: StudentExamHistoryEntity) => {
       return item.IsCompleted === 1; // 1: Completado
@@ -41,38 +45,40 @@ export class ListstudentexamhistoryComponent implements OnInit, ActionTableServi
 
     data.init(
       [
-        { Name: "History ID", key: "HistoryID" },
-        { Name: "Student ID", key: "StudentID" },
-        { Name: "Exam ID", key: "ExamID" },
-        { 
-          Name: "Status", 
-          key: "IsCompleted", 
-          IsStatus: true,
-          Html: {
-            // Las clases CSS se asignan según el estado; se espera que el componente <app-table> muestre "Completed" si el valor es 1 y "In Progress" si es 0.
-            0: 'badge badge-sm bgc-info-d1 text-white pb-1 px-25',
-            1: 'badge badge-sm bgc-red-d1 text-white pb-1 px-25'
-          },
-          Mask: {
-            0: 'En proceso',
-            1: 'Finalizado'
-          }
+      { Name: "ID Historial", key: "HistoryID" },
+      { Name: "ID Estudiante", key: "StudentID" },
+      { Name: "ID Examen", key: "ExamID" },
+      { 
+        Name: "Estado", 
+        key: "IsCompleted", 
+        IsStatus: true,
+        Html: {
+        // Las clases CSS se asignan según el estado; se espera que el componente <app-table> muestre "Completed" si el valor es 1 y "In Progress" si es 0.
+        0: 'badge badge-sm bgc-info-d1 text-white pb-1 px-25',
+        1: 'badge badge-sm bgc-red-d1 text-white pb-1 px-25'
         },
-        { Name: "Start Date", key: "StartDate", IsDate: true },
-        { 
-          Name: "Options", 
-          ColumnAction: true, 
-          Id: ["HistoryID","ExamID"],
-          Options: [
-            { Type: "Action", Name: "fa fa-check", Url: "#", ID: "complete", 
-              Function: viewButtonComplete , Title: "Marcar como examen finalizado" },
-            { Type: "Url", Name: "fa fa-pencil-alt", Url: "/enterprise/student/page/resolveexam?HistoryID={HistoryID}&ExamID={ExamID}" , 
-              Function: viewButtonComplete,Title: "Resolver examen" },
-          ]
+        Mask: {
+        0: 'En proceso',
+        1: 'Finalizado'
         }
+      },
+      { Name: "Fecha de inicio", key: "StartDate", IsDate: true },
+      { 
+        Name: "Opciones", 
+        ColumnAction: true, 
+        Id: ["HistoryID","ExamID"],
+        Options: [
+        { Type: "Action", Name: "fa fa-check", Url: "#", ID: "complete", 
+          Function: viewButtonComplete , Title: "Marcar como examen finalizado" },
+        { Type: "Url", Name: "fa fa-pencil-alt", Url: "/enterprise/student/page/resolveexam?HistoryID={HistoryID}&ExamID={ExamID}" , 
+          Function: viewButtonComplete,Title: "Resolver examen" },
+        { Type: "Url", Name: "fa fa-eye", Url: "/enterprise/student/page/examstudentreview?HistoryID={HistoryID}&ExamID={ExamID}" , 
+          Function: viewButtonResult,Title: "View result examen" },
+        ]
+      }
       ],
       { data: responsePageSearch },
-      "Student Exam History"
+      "Historial de Exámenes de Estudiantes"
     );
     this.dataTablaGenetic = data;
   }

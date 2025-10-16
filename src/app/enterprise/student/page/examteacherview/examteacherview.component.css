@@ -1,0 +1,18 @@
+.header { margin-bottom: 1rem; }
+.meta { margin: 0.5rem 0 1rem 0; }
+
+.img-wrap {
+  height: 200px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+.exercise-img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}

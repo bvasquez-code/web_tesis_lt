@@ -34,10 +34,14 @@
                   <div class="col-sm-9">
                     <select id="courseSelect" class="form-control" [(ngModel)]="selectedCourse" name="selectedCourse" required>
                       <option value="" disabled>-- Selecciona un curso --</option>
-                      <option *ngFor="let course of studentWeakTopics.CourseWeaknessRanking" [value]="course.course">
+                      <option *ngFor="let course of getCourseWeaknessRankingCourse()" [value]="course.course">
                         {{ course.course | titlecase }} (Promedio: {{ course.averagePerformance | number:'1.2-2' }})
                       </option>
                     </select>
+                    <br>
+                    <a class="btn btn-success" type="button" (click)="onGenerateExam()">
+                      <i class="fa fa-rocket mr-1"></i> Generar Examen
+                    </a>
                   </div>
                 </div>
                 
@@ -62,9 +66,6 @@
                   <div class="offset-md-3 col-md-9 text-nowrap d-flex flex-wrap justify-content-between">
                     <a class="btn btn-info btn-bold px-4 mb-2" type="button" (click)="generateEntryExam()">
                       <i class="fa fa-check mr-1"></i> Recomendar Examen Aleatorio
-                    </a>
-                    <a class="btn btn-success btn-bold px-4 mb-2 ml-2" type="button" (click)="onGenerateExam()">
-                      <i class="fa fa-rocket mr-1"></i> Generar Examen
                     </a>
                   </div>
                 </div>
@@ -227,5 +228,24 @@
       </div>
     </ng-container>
 
+  </div>
+</div>
+
+<!-- Modal de Bienvenida (se muestra si no hay historial) -->
+<div *ngIf="showWelcomeModal" class="modal-backdrop">
+  <div class="modal-card">
+    <h2 class="modal-title">¡Bienvenido/a a tu entrenador de matemáticas! 🎓</h2>
+    <p class="modal-body">
+      Aún no encontramos un historial de exámenes. Esta plataforma te acompañará a mejorar
+      en <strong>Álgebra, Aritmética, Geometría y Trigonometría</strong>, midiendo tu
+      <em>velocidad, precisión, consistencia, cobertura, mejora y retención</em>.
+      Empecemos con un <strong>Examen de Entrada</strong> para conocer tu nivel inicial.
+    </p>
+
+    <div class="modal-actions">
+      <button class="btn-primary" [disabled]="startingEntryExam" (click)="onStartWithEntryExam()">
+        {{ startingEntryExam ? 'Generando…' : 'Comenzar con examen de entrada' }}
+      </button>
+    </div>
   </div>
 </div>
