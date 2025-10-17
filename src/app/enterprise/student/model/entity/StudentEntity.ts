@@ -12,6 +12,7 @@ export class StudentEntity extends AuditTableEntity {
   public EnrollmentDate: Date = new Date();
   public GradeLevel: string = "";
   public RegistrationUrl: string = ""; // URL para el registro del estudiante
+  public HasAccount: string = "N"; // "Y" o "N"
 
   constructor() {
     super();

@@ -3,6 +3,7 @@ import { StudentRegisterWithUserDto } from '../../model/dto/StudentRegisterWithU
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from '../../service/StudentService';
 import { ToastrService } from 'ngx-toastr';
+import { DataSesionService } from 'src/app/enterprise/compartido/service/datasesion.service';
 
 @Component({
   selector: 'app-registerstudent',
@@ -15,6 +16,8 @@ export class RegisterstudentComponent implements OnInit {
   token: string = "";
   tokenValid: boolean = false;
   expirationDate: number = 0; // en milisegundos
+  isBlockedBySession = false;
+  blockMessage = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -24,12 +27,43 @@ export class RegisterstudentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+     this.viewPage(); // <-- primero valida si hay sesión
+    if (this.isBlockedBySession) return;
+
     localStorage.clear();
     // Extraer el token del query param "invitation"
     this.token = this.route.snapshot.queryParamMap.get('invitation') || "";
     if (this.token) {
       this.validateToken();
     }
+  }
+
+  viewPage(){
+      try {
+        const dataSesionService : DataSesionService = new DataSesionService();
+        const session = dataSesionService.getSessionStorageDto?.();
+        // Criterio simple: si hay UserCod, consideramos que existe sesión activa
+        const loggedIn = !!session && !!session.UserCod;
+
+        if (loggedIn) {
+          this.isBlockedBySession = true;
+          this.blockMessage =
+            'No puedes usar este enlace de invitación porque ya tienes una sesión iniciada. ' +
+            'Ábrelo en otro navegador, en una ventana de incógnito/privada, o cierra sesión y vuelve a intentarlo.';
+          this.tokenValid = false; // asegura que el formulario no se muestre
+          // Opcional: avisar con toast
+          this.toastr.info('Abre el enlace en modo incógnito o en otro navegador.', 'Sesión detectada');
+        } else {
+          // Si NO hay sesión, limpias storage para evitar restos
+          localStorage.clear();
+          sessionStorage.clear?.();
+        }
+      } catch (e) {
+        console.error('viewPage error:', e);
+        // En caso de error, por seguridad no bloqueamos
+        this.isBlockedBySession = false;
+      }
   }
 
   validateToken(): void {

@@ -1,4 +1,5 @@
-<div class="container mt-5" *ngIf="tokenValid; else invalidToken">
+<div *ngIf="!isBlockedBySession; else sessionBlocked">
+<div class="container mt-5" *ngIf="tokenValid && !isBlockedBySession; else invalidToken">
     <div class="card mx-auto" style="max-width: 500px;">
       <div class="card-header bg-primary text-white">
         <h3 class="mb-0">Registro de Estudiante</h3>
@@ -59,4 +60,19 @@
       El enlace de registro ha expirado o es inválido.
     </div>
   </ng-template>
+</div>
+
+  <ng-template #sessionBlocked>
+  <div class="alert alert-warning mt-5">
+    <h5 class="mb-2">Sesión detectada</h5>
+    <p class="mb-2">
+      {{ blockMessage }}
+    </p>
+    <ul class="mb-0">
+      <li>Opción 1: Copia este enlace y ábrelo en una ventana de <strong>incógnito/privada</strong>.</li>
+      <li>Opción 2: Ábrelo en <strong>otro navegador</strong> (p. ej., Edge, Chrome, Firefox).</li>
+      <li>Opción 3: <strong>Cierra sesión</strong> en esta ventana y vuelve a abrir el enlace.</li>
+    </ul>
+  </div>
+</ng-template>
   
