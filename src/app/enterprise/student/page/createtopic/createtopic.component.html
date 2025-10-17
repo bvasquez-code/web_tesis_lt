@@ -56,11 +56,11 @@
                 <label for="txtCourse" class="mb-0">Curso</label>
               </div>
               <div class="col-sm-9">
-                <input type="text"
-                       id="txtCourse"
-                       class="form-control col-sm-8 col-md-6"
-                       #txtCourse>
-              </div>
+                    <select class="form-control col-sm-8 col-md-6" #txtCourse>
+                        <option value="">[--SELECCIONAR CURSO--]</option>
+                        <option [value]="item.Course" *ngFor="let item of CourseList">{{ item.Course }}</option>
+                    </select>
+                </div>
             </div>
   
             <!-- Botones de Guardar y Volver -->

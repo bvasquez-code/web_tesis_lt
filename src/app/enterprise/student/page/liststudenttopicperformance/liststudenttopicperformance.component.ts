@@ -31,19 +31,9 @@ export class ListstudenttopicperformanceComponent implements OnInit, ActionTable
 
     data.init(
       [
-      { Name: "ID Estudiante", key: "StudentID" },
       { Name: "ID Tema", key: "TopicID" },
       { Name: "Puntos Promedio", key: "AveragePoints" },
-      { Name: "Desempeño", key: "PerformanceClassification" },
-      { 
-        Name: "Opciones", 
-        ColumnAction: true, 
-        Id: ["StudentID", "TopicID"],
-        Options: [
-        { Type: "Url", Name: "fa fa-pencil-alt", Url: "/enterprise/student_topic_performance/page/edit?StudentID={StudentID}&TopicID={TopicID}" },
-        { Type: "Action", Name: "fa fa-trash-alt", Url: "#", ID: "delete" }
-        ]
-      }
+      { Name: "Desempeño", key: "PerformanceClassification" }
       ],
       { data: responsePageSearch },
       "Student Topic Performance"

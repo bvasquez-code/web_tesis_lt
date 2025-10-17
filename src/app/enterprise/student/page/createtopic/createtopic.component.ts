@@ -7,6 +7,8 @@ import { ResponseWsDto } from 'src/app/enterprise/shared/model/dto/ResponseWsDto
 import { ValidationHelper } from 'src/app/enterprise/shared/helper/ValidationHelper';
 import { TopicRegisterDto } from '../../model/dto/TopicRegisterDto';
 import { TopicService } from '../../service/TopicService';
+import { CourseService } from '../../service/CourseService';
+import { CourseEntity } from '../../model/entity/CourseEntity';
 
 @Component({
   selector: 'app-createtopic',
@@ -18,6 +20,7 @@ export class CreatetopicComponent implements OnInit {
   TopicID: number = 0;
   // DTO que encapsula la entidad TopicEntity (la entidad extiende de AuditTableEntity)
   TopicRegister: TopicRegisterDto = new TopicRegisterDto();
+  CourseList : CourseEntity[] = [];
   // Bandera para marcar el campo TopicID como solo lectura (modo edición)
   txtTopicIDReadonly: boolean = false;
   // Helper para validaciones
@@ -32,7 +35,8 @@ export class CreatetopicComponent implements OnInit {
   constructor(
     private topicService: TopicService,
     private router: Router,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private courseService : CourseService
   ) {
     // Se obtiene el TopicID de la URL (por ejemplo, ?TopicID=12)
     const urlTree: any = this.router.parseUrl(this.router.url);
@@ -54,6 +58,7 @@ export class CreatetopicComponent implements OnInit {
     const rpt: ResponseWsDto = await this.topicService.FindDataForm(TopicID);
     if (!rpt.ErrorStatus) {
       this.TopicRegister = rpt.DataAdditional.find(e => e.Name === "topic")?.Data;
+      this.CourseList = rpt.DataAdditional.find(e => e.Name === "course")?.Data;
       if (this.TopicRegister && this.TopicRegister.topic.TopicID) {
         this.txtTopicIDReadonly = true;
       }

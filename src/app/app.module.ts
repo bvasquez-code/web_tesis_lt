@@ -72,6 +72,8 @@ import { RegisterstudentComponent } from './enterprise/student/page/registerstud
 import { CreatecustomexamComponent } from './enterprise/student/page/createcustomexam/createcustomexam.component';
 import { ExamteacherviewComponent } from './enterprise/student/page/examteacherview/examteacherview.component';
 import { ExamstudentreviewComponent } from './enterprise/student/page/examstudentreview/examstudentreview.component';
+import { ListcourseComponent } from './enterprise/student/page/listcourse/listcourse.component';
+import { CreatecourseComponent } from './enterprise/student/page/createcourse/createcourse.component';
 
 @NgModule({
   declarations: [
@@ -136,7 +138,9 @@ import { ExamstudentreviewComponent } from './enterprise/student/page/examstuden
     RegisterstudentComponent,
     CreatecustomexamComponent,
     ExamteacherviewComponent,
-    ExamstudentreviewComponent
+    ExamstudentreviewComponent,
+    ListcourseComponent,
+    CreatecourseComponent
   ],
   imports: [
     BrowserModule,

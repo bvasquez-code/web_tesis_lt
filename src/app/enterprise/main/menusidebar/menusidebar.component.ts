@@ -434,7 +434,20 @@ export class MenusidebarComponent implements OnInit {
     ResolveExam.url_position = "enterprise/student/page/resolveexam";
     ResolveExam.des_menu = "Resolver Examen";
     ResolveExam.icono = "nav-icon fa fa-pencil-alt";
-  
+
+    let ListCourse: SubMenuPagina = new SubMenuPagina();
+    ListCourse.url = "enterprise/student/page/listcourse";
+    ListCourse.url_position = "enterprise/student/page/listcourse";
+    ListCourse.des_menu = "Listado de Cursos";
+    ListCourse.icono = "nav-icon fa fa-book-open";
+
+    let CreateCourse: SubMenuPagina = new SubMenuPagina();
+    CreateCourse.url = "enterprise/student/page/createcourse";
+    CreateCourse.url_position = "enterprise/student/page/createcourse";
+    CreateCourse.des_menu = "Crear Curso";
+    CreateCourse.icono = "nav-icon fa fa-plus-square";
+    CreateCourse.IsVisible = false;
+      
     // Verificamos el permiso específico para visualizar esta opción (por ejemplo "ES000001")
     if (this.dataSesionService.PermissionExists("ESC00001")) {
       MainMenu.list_sub_menu.push(ListStudents);
@@ -473,6 +486,11 @@ export class MenusidebarComponent implements OnInit {
       MainMenu.list_sub_menu.push(ResolveExam);
     }
 
+    if (this.dataSesionService.PermissionExists("ESC00009")) {
+      MainMenu.list_sub_menu.push(ListCourse);
+      MainMenu.list_sub_menu.push(CreateCourse);
+    }
+
     let RegisterStudent: SubMenuPagina = new SubMenuPagina();
     RegisterStudent.url = "enterprise/student/page/registerstudent";
     RegisterStudent.url_position = "enterprise/student/page/registerstudent";
@@ -506,11 +524,11 @@ export class MenusidebarComponent implements OnInit {
       MainMenu.list_sub_menu.push(CreateCustomExam);
     }
     
-    if (this.dataSesionService.PermissionExists("ESC00008")) {
+    if (this.dataSesionService.PermissionExists("ESC0000X")) {
       MainMenu.list_sub_menu.push(TeacherExamView);
     }
 
-    if (this.dataSesionService.PermissionExists("ESC00009")){
+    if (this.dataSesionService.PermissionExists("ESC0000X")){
       MainMenu.list_sub_menu.push(StudentExamReview);
     }
       
