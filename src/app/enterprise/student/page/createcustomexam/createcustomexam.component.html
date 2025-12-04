@@ -8,7 +8,8 @@
         <!-- Formulario de creación de examen personalizado -->
         <div class="col-md-6" style="padding-left: 0;">
           <div class="card mx-auto shadow-lg rounded" style="max-width: 600px; border: 1px solid #28a745;">
-            <div class="card-header bg-success text-white text-center" style="font-family: 'Segoe UI', sans-serif; font-size: 1.2rem;">
+            <div class="card-header bg-success text-white text-center"
+              style="font-family: 'Segoe UI', sans-serif; font-size: 1.2rem;">
               <h4 class="mb-0">Examen Personalizado</h4>
             </div>
             <div class="card-body px-3 pb-1" style="font-family: 'Arial', sans-serif; font-size: 0.95rem;">
@@ -18,21 +19,24 @@
                   <label class="col-sm-3 col-form-label text-sm-right font-weight-bold">Modo de Examen</label>
                   <div class="col-sm-9 d-flex align-items-center">
                     <div class="custom-control custom-radio mr-3">
-                      <input type="radio" id="modeCourse" name="examMode" class="custom-control-input" [(ngModel)]="examMode" value="course">
+                      <input type="radio" id="modeCourse" name="examMode" class="custom-control-input"
+                        [(ngModel)]="examMode" value="course">
                       <label class="custom-control-label" for="modeCourse">Por Curso en lo que estoy más bajo</label>
                     </div>
                     <div class="custom-control custom-radio">
-                      <input type="radio" id="modeTopics" name="examMode" class="custom-control-input" [(ngModel)]="examMode" value="topics">
+                      <input type="radio" id="modeTopics" name="examMode" class="custom-control-input"
+                        [(ngModel)]="examMode" value="topics">
                       <label class="custom-control-label" for="modeTopics">Por Temas en lo que estoy más bajo</label>
                     </div>
                   </div>
                 </div>
-                
+
                 <!-- Modo Curso: Selección única -->
                 <div *ngIf="examMode === 'course'" class="form-group row">
                   <label for="courseSelect" class="col-sm-3 col-form-label text-sm-right font-weight-bold">Curso</label>
                   <div class="col-sm-9">
-                    <select id="courseSelect" class="form-control" [(ngModel)]="selectedCourse" name="selectedCourse" required>
+                    <select id="courseSelect" class="form-control" [(ngModel)]="selectedCourse" name="selectedCourse"
+                      required>
                       <option value="" disabled>-- Selecciona un curso --</option>
                       <option *ngFor="let course of getCourseWeaknessRankingCourse()" [value]="course.course">
                         {{ course.course | titlecase }} (Promedio: {{ course.averagePerformance | number:'1.2-2' }})
@@ -44,7 +48,7 @@
                     </a>
                   </div>
                 </div>
-                
+
                 <!-- Modo Temas: Selección múltiple -->
                 <div *ngIf="examMode === 'topics'" class="form-group">
                   <label class="form-label font-weight-bold">Temas</label>
@@ -52,7 +56,7 @@
                     <div *ngFor="let topic of studentWeakTopics.WeakestTopics" class="col-md-6 mb-2">
                       <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" [id]="'topic' + topic.TopicID"
-                               [value]="topic.TopicID" (change)="onTopicChange($event)">
+                          [value]="topic.TopicID" (change)="onTopicChange($event)">
                         <label class="custom-control-label" [for]="'topic' + topic.TopicID">
                           {{ topic.TopicName }} ({{ topic.Course | titlecase }})
                         </label>
@@ -60,7 +64,7 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <!-- Botones -->
                 <div class="mt-5 border-top pt-4">
                   <div class="offset-md-3 col-md-9 text-nowrap d-flex flex-wrap justify-content-between">
@@ -83,11 +87,8 @@
                   <!-- depuracion-hexagono.html -->
                   <div class="outer-hexagon">
                     <!-- radar dinámico: bind a la propiedad radarClipPath -->
-                    <div
-                      class="inner-hexagon"
-                      [style.clip-path]="radarClipPath"
-                    ></div>
-                  
+                    <div class="inner-hexagon" [style.clip-path]="radarClipPath"></div>
+
                     <!-- etiquetas en vértices -->
                     <span class="hex-label hex-label-1">Precisión</span>
                     <span class="hex-label hex-label-2">Vel. Resolución</span>
@@ -96,20 +97,17 @@
                     <span class="hex-label hex-label-5">Tasa de mejora</span>
                     <span class="hex-label hex-label-6">Retención de conocimiento</span>
                   </div>
-                  
+
                   <div *ngFor="let item of getCourseWeaknessRankingSkill()" class="progress-item col-md-12">
-                  <div class="progress-label">{{ item.description }}</div>
+                    <div class="progress-label">{{ item.description }}</div>
                     <div class="progress-track">
                       <div class="progress-fill" [style.width.%]="item.averagePerformance"
-                        [attr.aria-valuenow]="item.averagePerformance"  
-                        aria-valuemin="0"                    
-                        aria-valuemax="100"                  
-                      >
+                        [attr.aria-valuenow]="item.averagePerformance" aria-valuemin="0" aria-valuemax="100">
                         {{ item.averagePerformance | number:'1.2-2' }}%
                       </div>
                     </div>
-                </div>
-                  
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -121,7 +119,8 @@
         <!-- Panel lateral: Información de desempeño y tabla de ExamAttemptInfo -->
         <div class="col-md-6" style="padding-right: 0;">
           <div class="card shadow-sm mb-4" style="border: 1px solid #28a745;">
-            <div class="card-header bg-success text-white text-center" style="font-family: 'Segoe UI', sans-serif; font-size: 1.2rem;">
+            <div class="card-header bg-success text-white text-center"
+              style="font-family: 'Segoe UI', sans-serif; font-size: 1.2rem;">
               <h4 class="mb-0">Tu Desempeño</h4>
             </div>
             <div class="card-body" style="font-family: 'Arial', sans-serif; font-size: 0.95rem;">
@@ -129,10 +128,10 @@
               <h5 class="mb-2">Cursos</h5>
               <p class="text-muted small">El valor numérico indica el rendimiento promedio en el curso.</p>
               <ul class="list-group mb-3">
-                <li *ngFor="let course of getCourseWeaknessRankingCourse()" class="list-group-item d-flex justify-content-between align-items-center">
+                <li *ngFor="let course of getCourseWeaknessRankingCourse()"
+                  class="list-group-item d-flex justify-content-between align-items-center">
                   {{ course.course | titlecase }}
-                  <span class="badge"
-                    [ngClass]="{
+                  <span class="badge" [ngClass]="{
                       'badge-danger': course.averagePerformance < 50,
                       'badge-warning': course.averagePerformance >= 50 && course.averagePerformance < 70,
                       'badge-success': course.averagePerformance >= 70
@@ -144,19 +143,19 @@
               <div *ngIf="lowCoursePerformance" class="alert alert-danger" role="alert">
                 ¡Tu desempeño en algunos cursos es bajo! No te rindas, ¡sigue esforzándote!
               </div>
-  
+
               <!-- Sección de Temas -->
               <h5 class="mb-2 mt-4">Temas</h5>
-              <p class="text-muted small">El valor numérico indica la tasa de fracaso en el tema (en porcentaje).</p>
+              <p class="text-muted small">El valor numérico indica tu promedio de acierto porcentual en el tema.</p>
               <ul class="list-group mb-3">
-                <li *ngFor="let topic of studentWeakTopics.WeakestTopics" class="list-group-item d-flex justify-content-between align-items-center">
+                <li *ngFor="let topic of studentWeakTopics.WeakestTopics"
+                  class="list-group-item d-flex justify-content-between align-items-center">
                   {{ topic.TopicName }}
-                  <span class="badge"
-                    [ngClass]="{
-                      'badge-danger': topic.FailureRate*100 >= 100,
-                      'badge-success': topic.FailureRate*100 < 100
+                  <span class="badge" [ngClass]="{
+                      'badge-success': 100 - topic.FailureRate*100 >= 100,
+                      'badge-danger': 100 - topic.FailureRate*100 < 100
                     }">
-                    {{ topic.FailureRate*100 | number:'1.0-2' }} %
+                    {{ 100 - topic.FailureRate*100 | number:'1.0-2' }} %
                   </span>
                 </li>
               </ul>
@@ -164,11 +163,14 @@
                 Algunos temas muestran dificultades. ¡Ánimo, con práctica mejorarás!
               </div>
               <!-- Filtro por Curso en la tabla de Intentos -->
-              <div *ngIf="studentWeakTopics.ExamAttemptInfo && studentWeakTopics.ExamAttemptInfo.length > 0" class="mt-4">
+              <div *ngIf="studentWeakTopics.ExamAttemptInfo && studentWeakTopics.ExamAttemptInfo.length > 0"
+                class="mt-4">
                 <div class="form-group row">
-                  <label for="attemptCourseSelect" class="col-sm-4 col-form-label text-sm-right font-weight-bold">Filtrar por Curso</label>
+                  <label for="attemptCourseSelect"
+                    class="col-sm-4 col-form-label text-sm-right font-weight-bold">Filtrar por Curso</label>
                   <div class="col-sm-8">
-                    <select id="attemptCourseSelect" class="form-control" [(ngModel)]="selectedAttemptCourse" name="selectedAttemptCourse">
+                    <select id="attemptCourseSelect" class="form-control" [(ngModel)]="selectedAttemptCourse"
+                      name="selectedAttemptCourse">
                       <option *ngFor="let course of getCourseWeaknessRankingCourse()" [value]="course.course">
                         {{ course.course | titlecase }}
                       </option>
@@ -202,7 +204,7 @@
                     </tbody>
                   </table>
                 </div>
-                
+
               </div>
             </div> <!-- card-body -->
           </div> <!-- card -->
@@ -215,11 +217,10 @@
     <ng-container *ngIf="!existsTopicHistory(); else withHistory">
       <div class="card mx-auto shadow-lg rounded" style="max-width: 500px; border: 1px solid #28a745;">
         <div class="card-header bg-success text-white text-center"
-             style="font-family: 'Segoe UI', sans-serif; font-size: 1.2rem;">
+          style="font-family: 'Segoe UI', sans-serif; font-size: 1.2rem;">
           <h4 class="mb-0">Generar Examen de Entrada</h4>
         </div>
-        <div class="card-body text-center"
-             style="font-family: 'Arial', sans-serif; font-size: 0.95rem;">
+        <div class="card-body text-center" style="font-family: 'Arial', sans-serif; font-size: 0.95rem;">
           <p>Bienvenido, genera tu primer examen para comenzar.</p>
           <a class="btn btn-info btn-bold px-4" type="button" (click)="generateEntryExam()">
             <i class="fa fa-rocket mr-1"></i> Generar Examen Aleatorio
