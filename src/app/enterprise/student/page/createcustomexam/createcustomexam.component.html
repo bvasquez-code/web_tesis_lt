@@ -38,10 +38,14 @@
                     <select id="courseSelect" class="form-control" [(ngModel)]="selectedCourse" name="selectedCourse"
                       required>
                       <option value="" disabled>-- Selecciona un curso --</option>
-                      <option *ngFor="let course of studentWeakTopics.CourseWeaknessRanking" [value]="course.course">
+                      <option *ngFor="let course of getCourseWeaknessRankingCourse()" [value]="course.course">
                         {{ course.course | titlecase }} (Promedio: {{ course.averagePerformance | number:'1.2-2' }})
                       </option>
                     </select>
+                    <br>
+                    <a class="btn btn-success" type="button" (click)="onGenerateExam()">
+                      <i class="fa fa-rocket mr-1"></i> Generar Examen
+                    </a>
                   </div>
                 </div>
 
@@ -67,9 +71,6 @@
                     <a class="btn btn-info btn-bold px-4 mb-2" type="button" (click)="generateEntryExam()">
                       <i class="fa fa-check mr-1"></i> Recomendar Examen Aleatorio
                     </a>
-                    <a class="btn btn-success btn-bold px-4 mb-2 ml-2" type="button" (click)="onGenerateExam()">
-                      <i class="fa fa-rocket mr-1"></i> Generar Examen
-                    </a>
                   </div>
                 </div>
               </form>
@@ -80,8 +81,8 @@
               <div class="form-group row">
                 <div class="student-card mb-4">
                   <div class="header">
-                    <h2>juanito</h2>
-                    <div class="gpa">GPA: {{ 100 | number:'1.1-2' }}</div>
+                    <h2>{{ getSessionStorageDto().Person.Names + " " + getSessionStorageDto().Person.LastNames }}</h2>
+                    <div class="gpa">VALORACIÓN: {{ overallAssessment | number:'1.1-2' }}</div>
                   </div>
                   <!-- depuracion-hexagono.html -->
                   <div class="outer-hexagon">
@@ -91,14 +92,14 @@
                     <!-- etiquetas en vértices -->
                     <span class="hex-label hex-label-1">Precisión</span>
                     <span class="hex-label hex-label-2">Vel. Resolución</span>
-                    <span class="hex-label hex-label-3">Geometría</span>
-                    <span class="hex-label hex-label-4">Álgebra</span>
-                    <span class="hex-label hex-label-5">Aritmética</span>
-                    <span class="hex-label hex-label-6">Trigonometría</span>
+                    <span class="hex-label hex-label-3">Consistencia resolución</span>
+                    <span class="hex-label hex-label-4">Cobertura temática</span>
+                    <span class="hex-label hex-label-5">Tasa de mejora</span>
+                    <span class="hex-label hex-label-6">Retención de conocimiento</span>
                   </div>
 
-                  <div *ngFor="let item of studentWeakTopics.CourseWeaknessRanking" class="progress-item col-md-12">
-                    <div class="progress-label">{{ item.course }}</div>
+                  <div *ngFor="let item of getCourseWeaknessRankingSkill()" class="progress-item col-md-12">
+                    <div class="progress-label">{{ item.description }}</div>
                     <div class="progress-track">
                       <div class="progress-fill" [style.width.%]="item.averagePerformance"
                         [attr.aria-valuenow]="item.averagePerformance" aria-valuemin="0" aria-valuemax="100">
@@ -127,7 +128,7 @@
               <h5 class="mb-2">Cursos</h5>
               <p class="text-muted small">El valor numérico indica el rendimiento promedio en el curso.</p>
               <ul class="list-group mb-3">
-                <li *ngFor="let course of studentWeakTopics.CourseWeaknessRanking"
+                <li *ngFor="let course of getCourseWeaknessRankingCourse()"
                   class="list-group-item d-flex justify-content-between align-items-center">
                   {{ course.course | titlecase }}
                   <span class="badge" [ngClass]="{
@@ -145,16 +146,16 @@
 
               <!-- Sección de Temas -->
               <h5 class="mb-2 mt-4">Temas</h5>
-              <p class="text-muted small">El valor numérico indica la tasa de fracaso en el tema (en porcentaje).</p>
+              <p class="text-muted small">El valor numérico indica tu promedio de acierto porcentual en el tema.</p>
               <ul class="list-group mb-3">
                 <li *ngFor="let topic of studentWeakTopics.WeakestTopics"
                   class="list-group-item d-flex justify-content-between align-items-center">
                   {{ topic.TopicName }}
                   <span class="badge" [ngClass]="{
-                      'badge-danger': topic.FailureRate*100 >= 100,
-                      'badge-success': topic.FailureRate*100 < 100
+                      'badge-success': 100 - topic.FailureRate*100 >= 100,
+                      'badge-danger': 100 - topic.FailureRate*100 < 100
                     }">
-                    {{ topic.FailureRate*100 | number:'1.0-2' }} %
+                    {{ 100 - topic.FailureRate*100 | number:'1.0-2' }} %
                   </span>
                 </li>
               </ul>
@@ -170,7 +171,7 @@
                   <div class="col-sm-8">
                     <select id="attemptCourseSelect" class="form-control" [(ngModel)]="selectedAttemptCourse"
                       name="selectedAttemptCourse">
-                      <option *ngFor="let course of studentWeakTopics.CourseWeaknessRanking" [value]="course.course">
+                      <option *ngFor="let course of getCourseWeaknessRankingCourse()" [value]="course.course">
                         {{ course.course | titlecase }}
                       </option>
                     </select>
@@ -228,5 +229,24 @@
       </div>
     </ng-container>
 
+  </div>
+</div>
+
+<!-- Modal de Bienvenida (se muestra si no hay historial) -->
+<div *ngIf="showWelcomeModal" class="modal-backdrop">
+  <div class="modal-card">
+    <h2 class="modal-title">¡Bienvenido/a a tu entrenador de matemáticas! 🎓</h2>
+    <p class="modal-body">
+      Aún no encontramos un historial de exámenes. Esta plataforma te acompañará a mejorar
+      en <strong>Álgebra, Aritmética, Geometría y Trigonometría</strong>, midiendo tu
+      <em>velocidad, precisión, consistencia, cobertura, mejora y retención</em>.
+      Empecemos con un <strong>Examen de Entrada</strong> para conocer tu nivel inicial.
+    </p>
+
+    <div class="modal-actions">
+      <button class="btn-primary" [disabled]="startingEntryExam" (click)="onStartWithEntryExam()">
+        {{ startingEntryExam ? 'Generando…' : 'Comenzar con examen de entrada' }}
+      </button>
+    </div>
   </div>
 </div>
