@@ -20,7 +20,6 @@ import { StudentExamHistoryStatusDto } from '../../model/dto/StudentExamHistoryS
 })
 export class CreatecustomexamComponent implements OnInit {
 
-
   examMode: string = "course";
   selectedCourse: string = "";
   selectedTopics: number[] = [];
@@ -50,11 +49,11 @@ export class CreatecustomexamComponent implements OnInit {
 
   // Esta propiedad recibirá el clip-path dinámico
   public radarClipPath = '';
-
+  
 
   json = {
     data: [
-      { key: 'fuerza', value: 30 },
+      { key: 'fuerza',    value: 30 },
       { key: 'velocidad', value: 70 }
     ]
   };
@@ -62,10 +61,10 @@ export class CreatecustomexamComponent implements OnInit {
   constructor(
     private examService: ExamService,
     private toastr: ToastrService,
-    private studentService: StudentService,
+    private studentService : StudentService,
     private dataSesionService: DataSesionService,
-    private router: Router
-  ) { }
+    private router: Router 
+  ) {}
 
   ngOnInit(): void {
     this.loadStudentWeakTopics();
@@ -82,39 +81,39 @@ export class CreatecustomexamComponent implements OnInit {
         if (this.studentWeakTopics.CourseWeaknessRanking.length > 0) {
           this.selectedAttemptCourse = this.studentWeakTopics.CourseWeaknessRanking[0].course;
         }
-
+        
 
         for (const course of this.studentWeakTopics.CourseWeaknessRanking) {
-          if (course.course == "trigonometria") {
+          if(course.course == "trigonometria"){
             this.trigonometria = course.averagePerformance;
           }
-          if (course.course == "aritmetica") {
+          if(course.course == "aritmetica"){
             this.aritmetica = course.averagePerformance;
           }
-          if (course.course == "geometria") {
-
+          if(course.course == "geometria"){
+            
             this.geometria = course.averagePerformance;
           }
-          if (course.course == "algebra") {
+          if(course.course == "algebra"){
             this.algebra = course.averagePerformance;
           }
-          if (course.course == "VelocidadResolucion") {
+          if(course.course == "VelocidadResolucion"){
             this.velocidadResolucion = course.averagePerformance;
           }
-          if (course.course == "PrecisionResolucion") {
+          if(course.course == "PrecisionResolucion"){
             this.precisionResolucion = course.averagePerformance;
           }
 
-          if (course.course == "ConsistenciaResolucion") {
+          if(course.course == "ConsistenciaResolucion"){
             this.ConsistenciaResolucion = course.averagePerformance;
           }
-          if (course.course == "CoberturaTematica") {
+          if(course.course == "CoberturaTematica"){
             this.CoberturaTematica = course.averagePerformance;
           }
-          if (course.course == "TasaDeMejora") {
+          if(course.course == "TasaDeMejora"){
             this.TasaDeMejora = course.averagePerformance;
           }
-          if (course.course == "RetencionDeConocimiento") {
+          if(course.course == "RetencionDeConocimiento"){
             this.RetencionDeConocimiento = course.averagePerformance;
           }
         }
@@ -143,15 +142,15 @@ export class CreatecustomexamComponent implements OnInit {
     return this.studentWeakTopics.ExamAttemptInfo.filter(info => info.course.toLowerCase() === this.selectedAttemptCourse.toLowerCase());
   }
 
-  async generateEntryExam(): Promise<void> {
+  async generateEntryExam(): Promise<void>{  
     // Obtenemos el student_id desde la sesión
     const studentId = this.dataSesionService.getSessionStorageDto().UserCod;
-
+  
     // Construir el request usando el DTO GenerateExercisesRequestDto
-    const requestDto: any = { student_id: studentId };
+    const requestDto :any = { student_id : studentId};
+    
 
-
-
+    
     try {
       // Llamada al endpoint de generación de ejercicios a través del servicio
       const response = await this.examService.generateEntryExam(requestDto);
@@ -160,7 +159,7 @@ export class CreatecustomexamComponent implements OnInit {
         console.log("Examen generado:", response.Data); // Aquí response.Data se ajusta a GenerateExercisesResponseDto
 
         const examId = response.Data.ExamID;
-        // Utilizando el router para redirigir a la ruta deseada
+      // Utilizando el router para redirigir a la ruta deseada
         this.router.navigate([`/enterprise/student/page/resolveexam`], { queryParams: { ExamID: examId } });
 
       } else {
@@ -188,18 +187,18 @@ export class CreatecustomexamComponent implements OnInit {
 
   async onGenerateExamForAttempt(info: ExamAttemptInfoDto): Promise<void> {
     console.log("Generar examen para:", info);
-
-    let topics: string[] = [String(info.topicID)];
+    
+    let topics : string[] = [String(info.topicID)];
     await this.generateExercises(topics);
   }
 
   async onGenerateExam(): Promise<void> {
 
-    let topics: string[] = [];
+    let topics : string[] = [];
 
     if (this.examMode === 'course') {
       topics = this.studentWeakTopics.ExamAttemptInfo.filter(info => info.course.toLowerCase() === this.selectedCourse.toLowerCase())
-        .map(info => { return String(info.topicID); });
+      .map(info => { return String(info.topicID); });
     } else {
       topics = this.selectedTopics.map(String);
     }
@@ -208,17 +207,17 @@ export class CreatecustomexamComponent implements OnInit {
 
   }
 
-  async generateExercises(topics: string[]): Promise<void> {
+  async generateExercises(topics : string[]): Promise<void> {  
     // Obtenemos el student_id desde la sesión
     const studentId = this.dataSesionService.getSessionStorageDto().UserCod;
-
+  
     // Construir el request usando el DTO GenerateExercisesRequestDto
     const requestDto = new GenerateExercisesRequestDto();
     requestDto.student_id = studentId;
     requestDto.limit = 10;
     requestDto.total_points = 20;
     requestDto.topics = topics;
-
+    
     try {
       // Llamada al endpoint de generación de ejercicios a través del servicio
       const response = await this.examService.generateExercises(requestDto);
@@ -227,7 +226,7 @@ export class CreatecustomexamComponent implements OnInit {
         console.log("Examen generado:", response.Data); // Aquí response.Data se ajusta a GenerateExercisesResponseDto
 
         const examId = response.Data.ExamID;
-        // Utilizando el router para redirigir a la ruta deseada
+      // Utilizando el router para redirigir a la ruta deseada
         this.router.navigate([`/enterprise/student/page/resolveexam`], { queryParams: { ExamID: examId } });
 
       } else {
@@ -260,12 +259,12 @@ export class CreatecustomexamComponent implements OnInit {
   private computeRadarClipPath(): void {
     // Array con tus 6 valores en el orden de los vértices
 
-    let precisionResolucion = ObjectUtils.decode(Number(this.precisionResolucion), 0, 40, Number(this.precisionResolucion));
-    let velocidadResolucion = ObjectUtils.decode(Number(this.velocidadResolucion), 0, 40, Number(this.velocidadResolucion));
-    let ConsistenciaResolucion = ObjectUtils.decode(Number(this.ConsistenciaResolucion), 0, 40, Number(this.ConsistenciaResolucion));
-    let CoberturaTematica = ObjectUtils.decode(Number(this.CoberturaTematica), 0, 40, Number(this.CoberturaTematica));
-    let TasaDeMejora = ObjectUtils.decode(Number(this.TasaDeMejora), 0, 40, Number(this.TasaDeMejora));
-    let RetencionDeConocimiento = ObjectUtils.decode(Number(this.RetencionDeConocimiento), 0, 40, Number(this.RetencionDeConocimiento));
+    let precisionResolucion = ObjectUtils.decode(Number(this.precisionResolucion),0,40,Number(this.precisionResolucion));
+    let velocidadResolucion = ObjectUtils.decode(Number(this.velocidadResolucion),0,40,Number(this.velocidadResolucion));
+    let ConsistenciaResolucion = ObjectUtils.decode(Number(this.ConsistenciaResolucion),0,40,Number(this.ConsistenciaResolucion));
+    let CoberturaTematica = ObjectUtils.decode(Number(this.CoberturaTematica),0,40,Number(this.CoberturaTematica));
+    let TasaDeMejora = ObjectUtils.decode(Number(this.TasaDeMejora),0,40,Number(this.TasaDeMejora));
+    let RetencionDeConocimiento = ObjectUtils.decode(Number(this.RetencionDeConocimiento),0,40,Number(this.RetencionDeConocimiento));
 
     const valsOverallAssessment = [
       Number(this.precisionResolucion),
@@ -287,16 +286,16 @@ export class CreatecustomexamComponent implements OnInit {
       Number(RetencionDeConocimiento)
     ];
 
-
+    
 
     // Ángulos (radianes) para cada eje, empezando arriba y girando en el sentido de las agujas
     const angles = [
-      -Math.PI / 2,     // arriba
-      -Math.PI / 6,     // arriba-dcha
-      Math.PI / 6,     // abajo-dcha superior
-      Math.PI / 2,     // abajo
-      5 * Math.PI / 6, // abajo-izq superior
-      7 * Math.PI / 6  // arriba-izq
+      -Math.PI/2,     // arriba
+      -Math.PI/6,     // arriba-dcha
+       Math.PI/6,     // abajo-dcha superior
+       Math.PI/2,     // abajo
+       5 * Math.PI/6, // abajo-izq superior
+       7 * Math.PI/6  // arriba-izq
     ];
     const points = angles.map((angle, i) => {
       // radio proporcional: 0.5 = 50% de la mitad del ancho
@@ -308,40 +307,41 @@ export class CreatecustomexamComponent implements OnInit {
     });
     this.radarClipPath = `polygon(${points.join(', ')})`;
   }
+  
 
-
-  getSessionStorageDto() {
-    return this.dataSesionService.getSessionStorageDto();
-  }
-
-
-  getCourseWeaknessRankingSkill() {
-    return this.studentWeakTopics.CourseWeaknessRanking.filter(c => c.type === "habilidad");
-  }
-
-  getCourseWeaknessRankingCourse() {
-    return this.studentWeakTopics.CourseWeaknessRanking.filter(c => c.type === "curso");
-  }
-
-  async checkHistory(): Promise<void> {
-    try {
-      const userCod = this.dataSesionService.getSessionStorageDto().UserCod;
-      const resp = await this.studentService.checkHistory(userCod);
-      let hasHistory = false;
-      if (!resp?.ErrorStatus) {
-        const status: StudentExamHistoryStatusDto = resp.Data;
-
-        if (!status.IsMaster) {
-          hasHistory = status.HasHistory;
-          if (!hasHistory) this.showWelcomeModal = true;
-        }
-
-      }
-
-
-    } catch (e) {
-      console.error('checkHistory error', e);
+  getSessionStorageDto()
+    {
+        return this.dataSesionService.getSessionStorageDto();
     }
+  
+
+    getCourseWeaknessRankingSkill(){
+      return this.studentWeakTopics.CourseWeaknessRanking.filter(c => c.type === "habilidad");
+    }
+
+    getCourseWeaknessRankingCourse(){
+      return this.studentWeakTopics.CourseWeaknessRanking.filter(c => c.type === "curso");
+    }
+
+    async checkHistory(): Promise<void> {
+       try {
+          const userCod = this.dataSesionService.getSessionStorageDto().UserCod;
+          const resp = await this.studentService.checkHistory(userCod);
+          let hasHistory = false;
+          if (!resp?.ErrorStatus) {
+            const status : StudentExamHistoryStatusDto = resp.Data;
+
+            if(!status.IsMaster){
+              hasHistory = status.HasHistory;
+              if (!hasHistory) this.showWelcomeModal = true;
+            }
+
+          }
+
+          
+        } catch (e) {
+          console.error('checkHistory error', e);
+        }
   }
 
   // NUEVO: botón del modal -> genera examen de entrada y cierra modal
@@ -355,9 +355,5 @@ export class CreatecustomexamComponent implements OnInit {
       this.startingEntryExam = false;
     }
   }
-
-  getExamResults() {
-    return this.studentWeakTopics.ExamResults;
-  }
-
+    
 }

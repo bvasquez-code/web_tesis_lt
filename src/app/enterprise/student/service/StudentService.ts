@@ -63,7 +63,23 @@ export class StudentService {
 
   async checkHistory(studentId: String): Promise<ResponseWsDto> {
     const url: string = `${AppSetting.API}/api/v1/student/checkHistory`;
-    const RespuestaWS: ResponseWsDto = await this.apiService.ExecuteGetService(url, {StudentID: studentId});
+    const RespuestaWS: ResponseWsDto = await this.apiService.ExecuteGetService(url, { StudentID: studentId });
     return RespuestaWS;
+  }
+
+  async findByCreationUser(CreationUser: string): Promise<ResponseWsDto> {
+    const url: string = `${AppSetting.API}/api/v1/student/findByCreationUser`;
+    const res: ResponseWsDto = await this.apiService.ExecuteGetService(url, { CreationUser });
+    return res;
+  }
+
+  /**
+   * Resumen de puntos por examen de un estudiante.
+   * GET /api/v1/student/findExamPointsSummary?StudentID=ST00015
+   */
+  async findExamPointsSummary(StudentID: string): Promise<ResponseWsDto> {
+    const url: string = `${AppSetting.API}/api/v1/student/findExamPointsSummary`;
+    const res: ResponseWsDto = await this.apiService.ExecuteGetService(url, { StudentID });
+    return res;
   }
 }

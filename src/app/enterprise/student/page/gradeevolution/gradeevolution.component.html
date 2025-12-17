@@ -1,0 +1,46 @@
+<div role="main" class="main-content">
+    <div class="page-content container container-plus">
+        <div class="card acard mt-2 mt-lg-3">
+            <div class="card-header">
+                <h3 class="card-title text-125 text-primary-d2">
+                    <i class="fa fa-chart-line text-dark-l3 mr-1"></i>
+                    Evolución de notas por estudiante
+                </h3>
+            </div>
+
+            <div class="card-body px-3 pb-1" style="min-height: 400px;">
+                <!-- Select de estudiante -->
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label text-sm-right pr-0">
+                        Estudiante
+                    </label>
+                    <div class="col-sm-6">
+                        <select class="form-control" [(ngModel)]="selectedStudentID" (change)="onStudentChange()">
+                            <option [ngValue]="''" disabled>-- Seleccione un estudiante --</option>
+                            <option *ngFor="let s of students" [ngValue]="s.StudentID">
+                                {{ s.StudentID }} - {{ s.FirstName }} {{ s.LastName }}
+                            </option>
+                        </select>
+                        <small *ngIf="loadingStudents" class="text-muted">
+                            Cargando estudiantes...
+                        </small>
+                    </div>
+                </div>
+
+                <!-- Contenedor gráfico -->
+                <div class="mt-4" style="height: 280px; position: relative;">
+                    <!-- Mensajes -->
+                    <div *ngIf="loadingChart" class="text-center text-muted">
+                        Cargando evolución de notas...
+                    </div>
+                    <div *ngIf="!loadingChart && examSummary.length === 0" class="text-center text-muted">
+                        No hay exámenes registrados para este estudiante.
+                    </div>
+
+                    <!-- Canvas SIEMPRE presente -->
+                    <canvas #chartCanvas style="width: 100%; height: 100%;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

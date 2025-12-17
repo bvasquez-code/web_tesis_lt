@@ -126,17 +126,7 @@
             <div class="card-body" style="font-family: 'Arial', sans-serif; font-size: 0.95rem;">
               <!-- Sección de Cursos -->
               <h5 class="mb-2">Cursos</h5>
-              <p class="text-muted small">El valor numérico indica el rendimiento promedio en el curso, no te asustes si
-                es bajo, puede que aun no hayas intentado lo suficiente, así que animate y resuelme más ejercicios.</p>
-
-              <p class="text-muted">Total de Ejercicios Resueltos: {{ getExamResults().totalSolved }}</p>
-              <p class="text-muted">Total de Ejercicios Correctos: {{ getExamResults().totalCorrect }}</p>
-              <p class="text-muted">Total de Ejercicios Incorrectos: {{ getExamResults().totalIncorrect }}</p>
-              <div *ngIf="getExamResults().totalSolved < 100">
-                <p class="text-muted">Has resuelto menos de 100 ejercicios, para tener una mejor valoración y mejor
-                  vista de tus fortalezas y debilidades, resuelve más ejercicios.</p>
-              </div>
-
+              <p class="text-muted small">El valor numérico indica el rendimiento promedio en el curso.</p>
               <ul class="list-group mb-3">
                 <li *ngFor="let course of getCourseWeaknessRankingCourse()"
                   class="list-group-item d-flex justify-content-between align-items-center">
